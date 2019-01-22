@@ -15,6 +15,8 @@
 int		deal_key(int key, void *param)
 {
 	ft_putnbr(key);
+	if (key == ESC)
+		exit(1);
 	return (0);
 }
 
