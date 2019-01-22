@@ -13,6 +13,8 @@
 #ifndef		FDF_H
 # define	FDF_H
 
+#define ESC 53
+
 #include <mlx.h>
 #include <stdio.h>
 #include <string.h>
