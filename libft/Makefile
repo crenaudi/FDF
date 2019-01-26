@@ -16,7 +16,8 @@ CC = gcc
 RL = ranlib
 RM = rm -f
 CFLAGS = -Wall -Werror -Wextra -c
-SRC = ft_print_bits.c	\
+SRC = get_next_line.c		\
+	  ft_print_bits.c	\
 	  ft_memset.c		\
 	  ft_bzero.c		\
 	  ft_memcpy.c		\

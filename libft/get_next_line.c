@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 #include "get_next_line.h"
 
 int		need_to_stock(char **rest, char **line, int *i, int *ret)

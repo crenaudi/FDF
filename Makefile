@@ -11,12 +11,11 @@
 # **************************************************************************** #
 
 NAME = fdf
-CC = gcc
+CC = cc
 LIB = -L./libft/ -lft
 LIBFT_FOLDER = libft
 LIBFT = $(LIBFT_FOLDER)/libft.a
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra
 SRC = fdf.c		\
 	  bresenham.c
 OBJ = $(SRC:.c=.o)

@@ -14,35 +14,46 @@
 #include <stdio.h>
 #include "fdf.h"
 
-int		main(int argc, char **argv)
+int		deal_key(int key, void *param)
+{
+	int *i;
+
+	i = (int *)param;
+	if (key == ESC)
+		exit(1);
+	else if (key == UP)
+		*i += 1;
+	else if (key == DOWN)
+		*i -= 1;
+	else if (key == RIGHT)
+		printf("%d\n", *i);
+	return (0);
+}
+
+int		main()
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
-
-	int		fd;
-
+	int		width;
+	int		height;
 	int		x;
 	int		y;
 	int		i;
 
 	i = 0;
-	if (argc != 2)
-	{
-		ft_putstr("Usage: ./fdf <filename>\n");
-		return (0);
-	}
-	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
-	if (fd < 0 || ft_strstr(argv[1], ".fdf") == 0)
-		is_error(-1);
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 1024, 600, "mlx_42");
-
-	stock_fdf(fd);
-
+	win_ptr = mlx_new_window(mlx_ptr, 720, 473, "mlx_42");
 	mlx_key_hook(win_ptr, deal_key, (void *)&i);
-	//img_ptr = mlx_file_to_image(mlx_ptr, "42.fdf", &width, &height);
-	//printf("%d\n %d\n", width, height);
+	img_ptr = mlx_xpm_file_to_image(mlx_ptr, "cat.xpm", &width, &height);
+	x = (720 - width) / 2;
+	y = (473 - height) / 2;
+	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, x, y);
+	if (img == NULL)
+	{
+		is_perror(-1);
+	}
+	printf("%d\n %d\n", width, height);
 	mlx_loop(mlx_ptr);
 	return (0);
 }

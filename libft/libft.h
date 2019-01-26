@@ -21,7 +21,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define BUFF_SIZE 16
+# define BUFF_SIZE 100
 
 typedef unsigned long long t_u64;
 
