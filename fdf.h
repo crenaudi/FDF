@@ -30,17 +30,22 @@ typedef struct	s_mlx
 	void	*win_ptr;
 }		t_mlx;
 
-typedef struct s_fdf
+typedef struct	s_fdf
 {
-	int	x;
-	int	y;
-	int	h;
-	void	*next;
-}		t_fdf;
+	struct s_p	*p;
+}				t_fdf;
 
-int	deal_key(int key, void *param);
-int	deal_mouse(int button, void *param);
+typedef struct	s_p
+{
+	int			x;
+	int			y;
+	double		z;
+	struct s_p	*next;
+}				t_p;
+
+int		deal_key(int key, void *param);
+int		deal_mouse(int button, void *param);
 void	is_error(int i);
-void	stock_fdf(int fd);
+int		stock_fdf(int fd, t_fdf	*fdf);
 
 #endif

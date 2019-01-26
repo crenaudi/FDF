@@ -19,6 +19,7 @@ int		main(int argc, char **argv)
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
+	t_fdf	fdf;
 
 	int		fd;
 
@@ -38,7 +39,8 @@ int		main(int argc, char **argv)
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 1024, 600, "mlx_42");
 
-	stock_fdf(fd);
+	if (stock_fdf(fd, &fdf) == 1)
+		return (0);
 
 	mlx_key_hook(win_ptr, deal_key, (void *)&i);
 	//img_ptr = mlx_file_to_image(mlx_ptr, "42.fdf", &width, &height);

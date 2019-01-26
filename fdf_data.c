@@ -1,46 +1,62 @@
 #include "fdf.h"
 
-static  t_fdf   *new_point(t_fdf *tmp)
+t_p     *add_point(int x, int y, int z)
 {
-    t_fdf   *new;
+    t_p  *p;
 
-    new = tmp->next;
-    new->next = NULL;
-    return (new);
+    p = (t_p *)malloc(sizeof(t_p));
+    p->x = x;
+    p->y = y;
+    p->z = z;
+	p->next = NULL;
+    return (p);
 }
 
-static t_fdf     *coordonnees(char *line, int y, t_fdf *fdf)
+void    coordonees(char **line, t_fdf *fdf, int x, int y)
 {
-    int     x;
+    t_p     *p;
+    t_p     *next;
+    int     z;
 
-    x = 0;
-    ft_putstr(line);
-    while (line[x] != 0)
+    z = ft_atoi(*line);
+    p = add_point(x, y, z);
+    next = fdf->p;
+	if (next == NULL)
+	{
+		fdf->p = p;
+	}
+    else
     {
-        ft_putstr("Print info\n");
-        fdf->x = x;
-        fdf->y = y;
-        ft_putnbr(fdf->x);
-        x++;
-        if (line[x] != '0')
-            fdf = new_point(fdf);
+        while (next->next != NULL)
+		    next = next->next;
+	    next->next = p;
     }
-    return (fdf);
+    while (z > 9)
+    {
+        z = z / 10;
+        (*line)++;
+    }
 }
 
-void    stock_fdf(int fd)
+int   stock_fdf(int fd, t_fdf *fdf)
 {
-    t_fdf   *fdf;
-    char    *tmp;
-    int x;
-    int y;
+    char    *line;
+    int     x;
+    int     y;
 
-    x = 0;
     y = 0;
-    while (get_next_line(fd, &tmp))
+    while (get_next_line(fd, &line) == 1 || y == 6)
     {
-        fdf = coordonnees(tmp, y, fdf);
-        //printf("%d\n %d\n %d\n", *(fdf->h), *(fdf->x), *(fdf->y));
+        x = 0;
+        while (*line != '\0')
+        {
+            while (*line == ' ')
+                line++;
+            coordonees(&line, fdf, x, y);
+            line++;
+            x++;
+        }
         y++;
     }
+    return (1);
 }
