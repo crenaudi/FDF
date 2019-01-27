@@ -1,25 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
+/*   Updated: 2019/01/24 17:45:37 by crenaudi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
-# define ESC 53
 
-int     deal_key(int key, void *param)
+int		deal_key(int key, void *param)
 {
-	int *i;
-
-	i = (int *)param;
+	ft_putnbr(key);
 	if (key == ESC)
-		exit(1);
-	else if (key == UP)
-		*i += 1;
-	else if (key == DOWN)
-		*i -= 1;
-	else if (key == RIGHT)
-		printf("%d\n", *i);
+		exit(0);
+	if (key == UP)
+		exit(0);
+	if (key == DOWN)
+		exit(0);
+	if (key == RIGHT)
+		exit(0);
+	if (key == LEFT)
+		exit(0);
 	return (0);
 }
 
-int     deal_mousse(int button, void *param)
+int		deal_mouse(int button, void *param)
 {
-	if (button == 1)
-		ft_putstr("coucou");
+//	if (button == R_MOUSSE)
+//		exit(0);
+//	if (button == L_MOUSSE)
+//		exit(0);
+	if (button == SCROLL_UP)
+		exit(0);
+	if (button == SCROLL_DOWN)
+		exit(0);
 	return (0);
 }
