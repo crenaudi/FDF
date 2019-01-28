@@ -6,7 +6,7 @@
 #    By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:13:30 by crenaudi          #+#    #+#              #
-#    Updated: 2019/01/24 17:37:36 by crenaudi         ###   ########.fr        #
+#    Updated: 2019/01/27 16:47:42 by crenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,10 @@ LIBFT_FOLDER = libft
 LIBFT = $(LIBFT_FOLDER)/libft.a
 RM = rm -f
 SRC = fdf.c			\
+	  fdf_data.c	\
 	  bresenham.c	\
-	  event.c
+	  event.c		\
+	  fail.c
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all fclean re

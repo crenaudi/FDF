@@ -6,13 +6,13 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/01/21 19:30:02 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/01/27 16:40:16 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "fdf.h"
+#include "includes/fdf.h"
 
 int		deal_key(int key, void *param)
 {

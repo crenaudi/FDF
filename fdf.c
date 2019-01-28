@@ -6,13 +6,11 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/01/21 19:30:02 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/01/27 17:00:21 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include "fdf.h"
+#include "includes/fdf.h"
 
 int		main(int argc, char **argv)
 {
@@ -25,9 +23,7 @@ int		main(int argc, char **argv)
 
 	int		x;
 	int		y;
-	int		i;
 
-	i = 0;
 	if (argc != 2)
 	{
 		ft_putstr("Usage: ./fdf <filename>\n");
@@ -38,13 +34,9 @@ int		main(int argc, char **argv)
 		is_error(-1);
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 1024, 600, "mlx_42");
-
-	if (stock_fdf(fd, &fdf) == 1)
+	if (stock_fdf(fd, &fdf) != 1)
 		return (0);
-
-	mlx_key_hook(win_ptr, deal_key, (void *)&i);
-	//img_ptr = mlx_file_to_image(mlx_ptr, "42.fdf", &width, &height);
-	//printf("%d\n %d\n", width, height);
+	mlx_key_hook(win_ptr, deal_key, (void *)0);
 	mlx_loop(mlx_ptr);
 	return (0);
 }

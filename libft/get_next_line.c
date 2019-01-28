@@ -6,12 +6,11 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 13:58:03 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/01/02 17:26:07 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/01/27 16:50:49 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "get_next_line.h"
 
 int		need_to_stock(char **rest, char **line, int *i, int *ret)
 {

@@ -6,7 +6,7 @@
 #    By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:13:30 by crenaudi          #+#    #+#              #
-#    Updated: 2019/01/16 19:40:58 by crenaudi         ###   ########.fr        #
+#    Updated: 2019/01/27 16:49:32 by crenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ CC = gcc
 RL = ranlib
 RM = rm -f
 CFLAGS = -Wall -Werror -Wextra -c
-SRC = get_next_line.c		\
-	  ft_print_bits.c	\
+SRC = ft_print_bits.c	\
 	  ft_memset.c		\
 	  ft_bzero.c		\
 	  ft_memcpy.c		\
@@ -80,6 +79,7 @@ SRC = get_next_line.c		\
 	  ft_strrchr.c		\
 	  ft_swap.c			\
 	  ft_sqrt.c			\
+	  get_next_line.c	\
 	  ft_recursive_power.c
 OBJ = $(SRC:.c=.o)
 
@@ -91,21 +91,15 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(SRC) -I .
 	@$(AR) $(NAME) $(OBJ)
 	@$(RL) $(NAME)
-	@echo ".............."
-	@echo "| all lib ok |"
-	@echo ".............."
+	@echo "/// all lib ok ///"
 
 clean:
 	@$(RM) $(OBJ)
-	@echo "................"
-	@echo "| clean lib ok |"
-	@echo "................"
+	@echo "/// clean lib ok ///"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "................."
-	@echo "| fclean lib ok |"
-	@echo "................."
+	@echo "/// fclean lib ok ///"
 
 re: fclean all
 

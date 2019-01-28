@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 19:22:25 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/01/16 22:00:30 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/01/27 16:49:43 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ size_t				ft_recursive_power(int n, int power);
 void				ft_swap(int *a, int *b);
 int					get_next_line(const int fd, char **line);
 void				ft_print_words_tab(char const **tab);
+int					get_next_line(const int fd, char **line);
 typedef struct		s_list
 {
 	void			*content;

@@ -6,11 +6,11 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/01/24 17:45:37 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/01/27 16:35:57 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "includes/fdf.h"
 
 int		deal_key(int key, void *param)
 {
