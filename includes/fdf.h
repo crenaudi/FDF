@@ -38,15 +38,34 @@ typedef struct	s_mlx
 typedef struct	s_fdf
 {
 	struct s_p	*p;
+	struct s_cam	*cam;
+	double			e;
+	int		delta;
+	int		nb_p;
+	int		y_max;
+	int		x_max;
+	int		z_max;
 }				t_fdf;
 
 typedef struct	s_p
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 	double		z;
 	struct s_p	*next;
 }				t_p;
+
+typedef struct	s_cam
+{
+	double	x;
+	double	y;
+	double	z;
+	double	vx;
+	double	vy;
+	double	vz;
+	double	vleng;
+	struct s_cam	*next;
+}
 
 int		deal_key(int key, void *param);
 int		deal_mouse(int button, void *param);
