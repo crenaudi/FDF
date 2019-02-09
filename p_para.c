@@ -1,11 +1,22 @@
 #include <math.h>
 #include "includes/fdf.h"
 
+void converte(t_fdf fdf, t_p *p)
+{
+	while (p != NULL)
+	{
+		p->cx = p->z * tan(p->x);
+		p->cy =	p->z * tan(p->y);
+		p = p->next;
+	}
+	ft_putstr("all right");
+}
+/*
 t_cam	*parallele(t_p p, t_fdf fdf)
 {
 	t_cam	*coord;
 
-	coord.x = pow(tan(p.x), fdf.e); 
+	coord.x = pow(tan(p.x), fdf.e);
 	coord.y	= pow(tan(p.y), fdf.e);
 	coord.z	= pow(tan(p.z), fdf.e);
 	return(coord);
@@ -29,3 +40,4 @@ t_cam	*isometric(t_p p, t_fdf fdf)
 	}
 	return(coord);
 }
+*/

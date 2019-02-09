@@ -6,7 +6,7 @@
 #    By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:13:30 by crenaudi          #+#    #+#              #
-#    Updated: 2019/01/27 16:47:42 by crenaudi         ###   ########.fr        #
+#    Updated: 2019/02/03 19:28:13 by crenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ RM = rm -f
 SRC = fdf.c			\
 	  fdf_data.c	\
 	  bresenham.c	\
-	  event.c		\
+		p_para.c		\
+	  event.c			\
+	  affichage.c	\
 	  fail.c
 OBJ = $(SRC:.c=.o)
 
@@ -48,14 +50,3 @@ fclean: clean
 	@echo "/// fclean fdf ok ///"
 
 re: fclean all
-
-
-
-
-
-
-
-
-
-
-

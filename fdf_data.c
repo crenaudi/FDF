@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/01/27 17:02:47 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/03 19:43:25 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	coordonees(char **line, t_fdf *fdf, int x, int y)
 		z = z / 10;
 		(*line)++;
 	}
-	ft_putnbr(p->z);
 }
 
 int		stock_fdf(int fd, t_fdf *fdf)
@@ -66,12 +65,12 @@ int		stock_fdf(int fd, t_fdf *fdf)
 			while (*line == ' ')
 				line++;
 			coordonees(&line, fdf, x, y);
-			ft_putchar(' ');
 			line++;
 			x++;
 		}
-		ft_putchar('\n');
 		y++;
 	}
+	fdf->x_max = x;
+	fdf->y_max = y;
 	return (1);
 }
