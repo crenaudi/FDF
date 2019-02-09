@@ -1,15 +1,19 @@
 #include <math.h>
 #include "includes/fdf.h"
 
-void converte(t_fdf fdf, t_p *p)
+void converte(t_p **p)
 {
-	while (p != NULL)
+	t_p		*tmp;
+
+	tmp = *p;
+	while (tmp != NULL)
 	{
-		p->cx = p->z * tan(p->x);
-		p->cy =	p->z * tan(p->y);
-		p = p->next;
+		tmp->cx = tmp->z * tan(tmp->x);
+		tmp->cy = tmp->z * tan(tmp->y);
+		tmp->cx = tmp->cx * tmp->cx;
+		tmp->cy = tmp->cy * tmp->cy;
+		tmp = tmp->next;
 	}
-	ft_putstr("all right");
 }
 /*
 t_cam	*parallele(t_p p, t_fdf fdf)

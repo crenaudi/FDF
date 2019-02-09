@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/01/27 16:35:57 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/09 14:29:04 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		deal_key(int key, void *param)
 {
-	ft_putnbr(key);
 	if (key == ESC)
 		exit(0);
 	if (key == UP)

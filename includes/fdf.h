@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:12:16 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/03 19:44:43 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/09 12:46:35 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		deal_key(int key, void *param);
 int		deal_mouse(int button, void *param);
 void	is_error(int i);
 int		stock_fdf(int fd, t_fdf *fdf);
-void	converte(t_fdf fdf, t_p *p);
+void	converte(t_p **p);
 int		affichage(t_fdf fdf, t_p *p);
 int		line(t_fdf fdf, t_p *p1, t_p *p2);
 

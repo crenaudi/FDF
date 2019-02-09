@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:32:17 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/03 19:30:59 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/09 14:28:43 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		line(t_fdf fdf, t_p *p1, t_p *p2)
 	while (1)
 	{
 		fdf.color = color(fdf.color);
-		mlx_pixel_put(fdf.mlx_ptr, fdf.win_ptr, (int)p1->cx , (int)p1->cy, fdf.color);
+		mlx_pixel_put(fdf.mlx_ptr, fdf.win_ptr, (int)p1->cx , (int)p1->cy, 0xFFFFFF);
 		if ((int)p1->cx == (int)p2->cx && (int)p1->cy == (int)p2->cy)
 			return (0);
 		e2 = err;
