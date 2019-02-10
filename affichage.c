@@ -20,7 +20,7 @@ int		affichage(t_fdf fdf, t_p *p)
 	int			y;
 
 	i = 0;
-	y = 2;
+	y = 1;
 	x_max = p;
 	while (i++ <= fdf.x_max)
 		x_max = x_max->next;
@@ -34,15 +34,14 @@ int		affichage(t_fdf fdf, t_p *p)
 		x = 0;
 		while (x < fdf.x_max)
 		{
-			if (x < fdf.x_max)
-			{
+			if (x <= fdf.x_max)
 				line(fdf, p, p->next);
-				if (y < fdf.y_max)
-				{
-					line(fdf, p, x_max);
-					x_max = x_max->next;
-				}
+			if (y < fdf.y_max && x_max != NULL && x_max->next != NULL)
+			{
+				line(fdf, p, x_max);
+				x_max = x_max->next;
 			}
+
 		ft_putnbr(p->x);
 		ft_putchar(' ');
 		x++;
