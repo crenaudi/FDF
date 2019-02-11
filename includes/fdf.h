@@ -6,32 +6,43 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:12:16 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/09 12:46:35 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 19:38:51 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		FDF_H
 # define	FDF_H
 
-#define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
-#define ESC			53
-#define LEFT		123
-#define RIGHT		124
-#define UP			126
-#define DOWN		125
-#define L_MOUSSE	1
-#define	R_MOUSSE	2
-#define SCROLL_UP	5
-#define SCROLL_DOWN	7
+# include "mlx.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <math.h>
+# include "../libft/libft.h"
 
-#include "mlx.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include "../libft/libft.h"
+# define ERROR -1
+# define SUCCESS 0
+// utiliser << plutot
+//# define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
+# define ESC			53
+# define LEFT		123
+# define RIGHT		124
+# define UP			126
+# define DOWN		125
+# define L_MOUSSE	1
+# define	R_MOUSSE	2
+# define SCROLL_UP	5
+# define SCROLL_DOWN	7
 
-typedef struct	s_fdf
+//foreward declaretion
+typedef int t_vec2 __attribute__((ext_vector_type(2)));
+
+typedef struct	s_fdf			t_fdf;
+typedef struct	s_p				t_p;
+typedef struct	s_point			t_point;
+typedef struct	s_bresenham		t_bresenham;
+
+struct	s_fdf
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -40,45 +51,45 @@ typedef struct	s_fdf
 	int				bpp;
 	int				sl;
 	int				endian;
-	struct s_p		***tab_O;
-	struct s_p		**ptr;
+	struct s_point	**tab_point;
 	struct s_p		*p;
 	struct s_cam	*cam;
 	double			e;
 	double			color;
 	int				y_max;
 	int				x_max;
-}				t_fdf;
+};
 
-typedef struct	s_p
+struct	s_p
 {
 	double		x;
 	double		y;
 	double		z;
 	struct s_p	*next;
-}				t_p;
+};
 
-typedef struct	s_index
+struct	s_point
 {
-	int				x;
-	int				y;
-}								t_index;
+	double		x;
+	double		y;
+	double		z;
+};
 
-typedef struct	s_cam
+
+struct	s_bresenham
 {
-	double	vx;
-	double	vy;
-	double	vz;
-	double	vleng;
-	struct s_cam	*next;
-}				t_cam;
+	t_vec2	p1;
+	t_vec2	p2;
+	t_vec2	dir;
+	t_vec2	sens;
+};
 
 int		deal_key(int key, void *param);
 int		deal_mouse(int button, void *param);
 void	is_error(int i);
 int		stock_fdf(int fd, t_fdf *fdf);
-void	converte(t_p **p);
-int		affichage(t_fdf fdf, t_p *p);
-int		line(t_fdf fdf, t_p *p1, t_p *p2);
+int		converte(t_fdf *fdf);
+int		affichage(t_fdf *fdf, t_point **coord);
+void	line(t_fdf *fdf, t_point p1, t_point ip2);
 
 #endif

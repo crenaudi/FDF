@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/03 19:43:25 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 17:22:47 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_p		*add_point(int x, int y, int z)
 	return (p);
 }
 
-void	coordonees(char **line, t_fdf *fdf, int x, int y)
+static void	coordonees(char **line, t_fdf *fdf, int x, int y)
 {
 	t_p	*p;
 	t_p	*next;
@@ -49,25 +49,24 @@ void	coordonees(char **line, t_fdf *fdf, int x, int y)
 	}
 }
 
-int 	make_tab(int y, t_fdf **fdf)
+static int 	make_tab(int y, t_fdf *fdf)
 {
-	t_p		***tab_O;
-	t_p 	**ptr;
-	t_p 	*p;
+	t_point *point;
+	t_p		*p;
 	int 	x;
 
-	p = (*fdf)->p;
-	if (!(tab_O = (t_p ***)malloc(sizeof(t_p) * ((*fdf)->y_max + 1))))
+	p = fdf->p;
+	if (!(fdf->tab_point = (t_point **)malloc(sizeof(t_point *) * fdf->y_max)))
 		return (0);
-	while (y++ <= (*fdf)->y_max)
+	while (++y < fdf->y_max)
 	{
-		x = 0;
-		if (!(ptr = (t_p **)malloc(sizeof(t_p) * ((*fdf)->x_max))))
+		x = -1;
+		if (!(point = (t_point *)malloc(sizeof(t_point) * fdf->x_max)))
 			return (0);
-		tab_O[y] = ptr;
-		while (x++ <= (*fdf)->x_max)
+		fdf->tab_point[y] = point;
+		while (++x < fdf->x_max)
 		{
-			ptr[x] = p;
+			point[x] = *(t_point*)p;
 			p = p->next;
 		}
 	}
@@ -96,6 +95,6 @@ int		stock_fdf(int fd, t_fdf *fdf)
 	}
 	fdf->x_max = x;
 	fdf->y_max = y;
-	make_tab(0, &fdf);
+	make_tab(-1, fdf);
 	return (1);
 }

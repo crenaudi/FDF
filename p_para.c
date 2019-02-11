@@ -16,18 +16,28 @@ void converte(t_p **p)
 	}
 }*/
 
-void converte(t_p **p)
+int		converte(t_fdf *fdf)
 {
-	t_p		*tmp;
+	t_point	**coord;
+	t_point	*point;
+	int		x;
+	int		y;
 
-	tmp = *p;
-	while (tmp != NULL)
+	y = -1;
+	x = -1;
+	if (!(coord = (t_point **)malloc(sizeof(t_point *) * fdf->y_max)))
+		return (ERROR);
+	while (++y < fdf->y_max)
 	{
-		tmp->cz = 0;
-		tmp->cx = tmp->x * 20;
-		tmp->cy = tmp->y * 20;
-		tmp = tmp->next;
+		if (!(point = (t_point *)malloc(sizeof(t_point) * fdf->x_max)))
+			return (ERROR);
+		while (++x < fdf->x_max)
+		{
+			coord[y][x] = fdf->tab_point[y][x];
+		}
 	}
+	affichage(fdf, coord);
+	return (SUCCESS);
 }
 /*
 t_cam	*parallele(t_p p, t_fdf fdf)

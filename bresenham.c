@@ -6,12 +6,12 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:32:17 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/09 14:28:43 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 19:38:47 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-
+/*
 int		color(double t)
 {
 	return(RGB(
@@ -19,48 +19,43 @@ int		color(double t)
 				127.5 * (sin(t) + 1),
 				127.5 * (1 - cos(t))));
 }
+*/
 
-int		degrade_color(double t, int x1)
+static void		init_bresenham(t_bresenham *b, t_point p1, t_point p2)
 {
-	return(t - 0.1);
+	b->p1 = (t_vec2){(int)p1.x, (int)p1.y};
+	b->p2 = (t_vec2){(int)p2.x, (int)p2.y};
+	b->dir.x = abs(b->p2.x - b->p1.x);
+	b->dir.y = abs(b->p2.y - b->p1.y);
+	b->sens.x = b->p1.x < b->p2.x ? 1 : -1;
+	b->sens.y = b->p1.y < b->p2.y ? 1 : -1;
 }
 
-int		line(t_fdf fdf, t_p *p1, t_p *p2)
+void	line(t_fdf *fdf, t_point p1, t_point p2)
 {
-	int sx;
-	int sy;
-	int dx;
-	int dy;
+	t_bresenham		b;
 	int err;
 	int e2;
 
-	p1->cx = (int)p1->cx;
-	p2->cx = (int)p2->cx;
-	p1->cy = (int)p1->cy;
-	p2->cy = (int)p2->cy;
-	dx = abs((int)p2->cx - (int)p1->cx);
-	dy = abs((int)p2->cy - (int)p1->cy);
-	sx = (int)p1->cx < (int)p2->cx ? 1 : -1;
-	sy = (int)p1->cy < (int)p2->cy ? 1 : -1;
-	err = (dx > dy ? dx : -dy) / 2;
+	init_bresenham(&b, p1, p2);
+	err = (b.dir.x > b.dir.y ? b.dir.x : -b.dir.y) / 2;
 	e2 = 0;
-	while (1)
+	while ("OUIIIIIIIIIII")
 	{
-		fdf.color = color(fdf.color);
-		mlx_pixel_put(fdf.mlx_ptr, fdf.win_ptr, (int)p1->cx , (int)p1->cy, 0xFFFFFF);
-		if ((int)p1->cx == (int)p2->cx && (int)p1->cy == (int)p2->cy)
-			return (0);
+		//fdf->color = color(fdf->color);
+		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, b.p1.x, b.p1.y, 0xFFFFFF);
+		if (b.p1.x == b.p2.x && b.p1.y == b.p2.y)
+			return ;
 		e2 = err;
-		if (e2 > -dx)
+		if (e2 > -b.dir.x)
 		{
-			err -= dy;
-			p1->cx += sx;
+			err -= b.dir.y;
+			b.p1.x += b.sens.x;
 		}
-		if (e2 < dy)
+		if (e2 < b.dir.y)
 		{
-			err += dx;
-			p1->cy += sy;
+			err += b.dir.x;
+			b.p1.y += b.sens.y;
 		}
 	}
-	return (1);
 }

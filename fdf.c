@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/09 12:54:18 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/11 17:50:06 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int		main(int argc, char **argv)
 	fdf.e = 2;
 	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1024, 600, "mlx_42");
 	stock_fdf(fd, &fdf);
-	converte(&fdf.p);
-	affichage(fdf, fdf.p);
+	converte(&fdf);
 
 	mlx_key_hook(fdf.win_ptr, deal_key, (void *)0);
 	mlx_loop(fdf.mlx_ptr);
