@@ -16,7 +16,6 @@ t_p		*add_point(int x, int y, int z)
 {
 	t_p	*p;
 
-	p = (t_p *)malloc(sizeof(t_p));
 	p->x = x;
 	p->y = y;
 	p->z = z;
@@ -50,6 +49,31 @@ void	coordonees(char **line, t_fdf *fdf, int x, int y)
 	}
 }
 
+int 	make_tab(int y, t_fdf **fdf)
+{
+	t_p		***tab_O;
+	t_p 	**ptr;
+	t_p 	*p;
+	int 	x;
+
+	p = (*fdf)->p;
+	if (!(tab_O = (t_p ***)malloc(sizeof(t_p) * ((*fdf)->y_max + 1))))
+		return (0);
+	while (y++ <= (*fdf)->y_max)
+	{
+		x = 0;
+		if (!(ptr = (t_p **)malloc(sizeof(t_p) * ((*fdf)->x_max))))
+			return (0);
+		tab_O[y] = ptr;
+		while (x++ <= (*fdf)->x_max)
+		{
+			ptr[x] = p;
+			p = p->next;
+		}
+	}
+	return (0);
+}
+
 int		stock_fdf(int fd, t_fdf *fdf)
 {
 	char	*line;
@@ -72,5 +96,6 @@ int		stock_fdf(int fd, t_fdf *fdf)
 	}
 	fdf->x_max = x;
 	fdf->y_max = y;
+	make_tab(0, &fdf);
 	return (1);
 }

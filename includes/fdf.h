@@ -40,6 +40,8 @@ typedef struct	s_fdf
 	int				bpp;
 	int				sl;
 	int				endian;
+	struct s_p		***tab_O;
+	struct s_p		**ptr;
 	struct s_p		*p;
 	struct s_cam	*cam;
 	double			e;
@@ -53,9 +55,6 @@ typedef struct	s_p
 	double		x;
 	double		y;
 	double		z;
-	double		cx;
-	double		cy;
-	double		cz;
 	struct s_p	*next;
 }				t_p;
 
