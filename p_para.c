@@ -25,7 +25,8 @@ int		converte(t_fdf *fdf)
 		while (++x < fdf->x_max)
 		{
 			coord[y][x] = fdf->tab_point[y][x];
-			delta;
+			delta.x = -0,785398;
+			delta.y = -0,785398
 		}
 	}
 	affichage(fdf, coord);
