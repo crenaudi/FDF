@@ -34,6 +34,7 @@ int		converte(t_fdf *fdf)
 		while (++x < fdf->x_max)
 		{
 			coord[y][x] = fdf->tab_point[y][x];
+			delta;
 		}
 	}
 	affichage(fdf, coord);
