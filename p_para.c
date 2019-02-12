@@ -3,8 +3,8 @@
 /*
 void converte_rot(t_point)
 {
-	x = cos(delta) + sin(delta) * x;
-	y = cos(delta) - sin(delta) * y;
+	x = cos(delta.x) + sin(delta.x) * x;
+	y = cos(delta.y) - sin(delta.y) * y;
 }*/
 
 int		converte(t_fdf *fdf)
