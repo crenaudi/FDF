@@ -1,19 +1,10 @@
 #include <math.h>
 #include "includes/fdf.h"
 /*
-void converte(t_p **p)
+void converte_rot(t_point)
 {
-	t_p		*tmp;
-
-	tmp = *p;
-	while (tmp != NULL)
-	{
-		tmp->cx = tmp->x - ((sin(tmp->y) * cos(tmp->x)) / cos(tmp->y)) * tmp->z;
-		tmp->cy = tmp->y - ((sin(tmp->y) * sin(tmp->x)) / cos(tmp->y)) * tmp->z;
-		tmp->cx = (tmp->cx * tmp->cx);
-		tmp->cy = (tmp->cy * tmp->cy);
-		tmp = tmp->next;
-	}
+	x = cos(delta) + sin(delta) * x;
+	y = cos(delta) - sin(delta) * y;
 }*/
 
 int		converte(t_fdf *fdf)
