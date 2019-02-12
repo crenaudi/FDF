@@ -36,7 +36,7 @@
 
 //foreward declaretion
 typedef int t_vec2 __attribute__((ext_vector_type(2)));
-typedef int t_vec3 __attribute__((ext_vector_type(3)));
+typedef double t_vec3 __attribute__((ext_vector_type(3)));
 
 typedef struct	s_fdf			t_fdf;
 typedef struct	s_p				t_p;
