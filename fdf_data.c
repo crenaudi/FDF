@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 15:54:48 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 16:12:11 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,16 @@ t_p		*add_point(int x, int y, int z)
 static void	coordonees(char **line, t_fdf *fdf, int x, int y)
 {
 	t_p	*p;
-//	t_p	*last;
 	int	z;
 
 	z = ft_atoi(*line);
 	p = add_point(x, y, z);
-//	last = fdf->p;
 	if (fdf->p == NULL)
 	{
 		fdf->p = p;
 	}
 	else
 	{
-//		while (last->next != NULL)
-//			last = last->next;
 		p->next = fdf->p;
 		fdf->p = p;
 	}
@@ -57,6 +53,7 @@ static int 	make_tab(int y, t_fdf *fdf)
 	t_p		*p;
 	int 	x;
 
+	ft_putstr("ok");
 	p = fdf->p;
 	if (!(fdf->tab_point = (t_point **)malloc(sizeof(t_point *) * fdf->y_max)))
 		return (0);
@@ -68,7 +65,9 @@ static int 	make_tab(int y, t_fdf *fdf)
 		fdf->tab_point[y] = point;
 		while (++x < fdf->x_max)
 		{
-			point[x] = *(t_point*)p;
+			point[x].x = p->x;
+			point[x].y = p->y;
+			point[x].z = p->z;
 			p = p->next;
 		}
 	}
@@ -85,7 +84,7 @@ int		stock_fdf(int fd, t_fdf *fdf)
 	y = 0;
 	fdf->p = p;
 	p = NULL;
-	while (get_next_line(fd, &line) == 1 || y == 6)
+	while (get_next_line(fd, &line) == 1)
 	{
 		x = 0;
 		while (*line != '\0')
@@ -99,8 +98,6 @@ int		stock_fdf(int fd, t_fdf *fdf)
 		ft_putchar('\n');
 		y++;
 	}
-	//ft_putstr("ok");
-	//ft_putnbr(fdf->p->x);
 	fdf->x_max = x;
 	fdf->y_max = y;
 	make_tab(-1, fdf);
