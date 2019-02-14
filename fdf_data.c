@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 15:21:04 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 15:54:48 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_p		*add_point(int x, int y, int z)
 	p->x = (double)x;
 	p->y = (double)y;
 	p->z = (double)z;
+	p->next = NULL;
 	return (p);
 }
 
@@ -32,7 +33,6 @@ static void	coordonees(char **line, t_fdf *fdf, int x, int y)
 	z = ft_atoi(*line);
 	p = add_point(x, y, z);
 //	last = fdf->p;
-	ft_putnbr(p->z);
 	if (fdf->p == NULL)
 	{
 		fdf->p = p;
@@ -41,7 +41,8 @@ static void	coordonees(char **line, t_fdf *fdf, int x, int y)
 	{
 //		while (last->next != NULL)
 //			last = last->next;
-		fdf->p->next = p;
+		p->next = fdf->p;
+		fdf->p = p;
 	}
 	while (z > 9)
 	{
@@ -83,12 +84,13 @@ int		stock_fdf(int fd, t_fdf *fdf)
 
 	y = 0;
 	fdf->p = p;
+	p = NULL;
 	while (get_next_line(fd, &line) == 1 || y == 6)
 	{
 		x = 0;
 		while (*line != '\0')
 		{
-			while (*line == ' ')
+			while (*line == ' ' && *line != '\0')
 				line++;
 			coordonees(&line, fdf, x, y);
 			line++;
@@ -97,8 +99,8 @@ int		stock_fdf(int fd, t_fdf *fdf)
 		ft_putchar('\n');
 		y++;
 	}
-	ft_putstr("ok");
-	ft_putnbr(fdf->p->x);
+	//ft_putstr("ok");
+	//ft_putnbr(fdf->p->x);
 	fdf->x_max = x;
 	fdf->y_max = y;
 	make_tab(-1, fdf);

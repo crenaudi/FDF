@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/11 17:50:06 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 15:42:45 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (fd < 0 || ft_strstr(argv[1], ".fdf") == 0)
 		is_error(-1);
+	ft_bzero(&fdf, sizeof(fdf));
 	fdf.mlx_ptr = mlx_init();
 
 /* PRINT IMAGE

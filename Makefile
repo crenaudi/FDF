@@ -6,7 +6,7 @@
 #    By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:13:30 by crenaudi          #+#    #+#              #
-#    Updated: 2019/02/14 14:55:34 by crenaudi         ###   ########.fr        #
+#    Updated: 2019/02/14 15:36:23 by crenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(LIBFT):
 	make -sC $(LIBFT_FOLDER)
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(OBJ)
+	@$(CC) -fsanitize=address -g3 $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(OBJ)
 	@echo "/// all fdf ok ///"
 
 clean:
