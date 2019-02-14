@@ -16,10 +16,10 @@ t_p		*add_point(int x, int y, int z)
 {
 	t_p	*p;
 
+	p = (t_p *)malloc(sizeof(t_p) * 1);
 	p->x = x;
 	p->y = y;
 	p->z = z;
-	p->next = NULL;
 	return (p);
 }
 
@@ -32,14 +32,18 @@ static void	coordonees(char **line, t_fdf *fdf, int x, int y)
 	z = ft_atoi(*line);
 	p = add_point(x, y, z);
 	next = fdf->p;
+	ft_putstr("A");
 	if (next == NULL)
 	{
+		ft_putstr("NULL");
 		fdf->p = p;
 	}
 	else
 	{
+		ft_putstr("next");
 		while (next->next != NULL)
 			next = next->next;
+		ft_putstr("validé");
 		next->next = p;
 	}
 	while (z > 9)
@@ -88,6 +92,7 @@ int		stock_fdf(int fd, t_fdf *fdf)
 			while (*line == ' ')
 				line++;
 			coordonees(&line, fdf, x, y);
+			ft_putstr("fini");
 			line++;
 			x++;
 		}

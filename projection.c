@@ -7,6 +7,15 @@ void converte_rot(t_point)
 	y = cos(delta.y) - sin(delta.y) * y;
 }*/
 
+void donnees_coordonnees(t_point *coord, t_point origine)
+{
+	coord->x = origine.x;
+	coord->y = origine.y;
+	coord->z = origine.z;
+	coord->delta.x = -0.785398;
+	coord->delta.y = -0.785398;
+}
+
 int		converte(t_fdf *fdf)
 {
 	t_point	**coord;
@@ -16,6 +25,7 @@ int		converte(t_fdf *fdf)
 
 	y = -1;
 	x = -1;
+	ft_putstr("Hey");
 	if (!(coord = (t_point **)malloc(sizeof(t_point *) * fdf->y_max)))
 		return (ERROR);
 	while (++y < fdf->y_max)
@@ -24,9 +34,7 @@ int		converte(t_fdf *fdf)
 			return (ERROR);
 		while (++x < fdf->x_max)
 		{
-			coord[y][x] = fdf->tab_point[y][x];
-			delta.x = -0,785398;
-			delta.y = -0,785398
+			donnees_coordonnees(&coord[y][x], (*fdf).tab_point[y][x]);
 		}
 	}
 	affichage(fdf, coord);

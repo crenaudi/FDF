@@ -20,15 +20,13 @@ int		affichage(t_fdf *fdf, t_point **coord)
 	y = -1;
 	while (++y < fdf->y_max)
 	{
-		x = -1;
+		x = 0;
 		while (++x < fdf->x_max)
 		{
 			if (x < fdf->x_max)
 				line(fdf, coord[y][x], coord[y][x + 1]);
 			if (y < fdf->y_max)
-			{
 				line(fdf, coord[y][x], coord[y + fdf->x_max][x]);
-			}
 		}
 	}
 	ft_putstr("sortie");

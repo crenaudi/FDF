@@ -19,12 +19,12 @@ FRAMEWORK = -framework OpenGl -framework AppKit
 LIBFT_FOLDER = libft
 LIBFT = $(LIBFT_FOLDER)/libft.a
 RM = rm -f
-SRC = fdf.c			\
-	  fdf_data.c	\
-	  bresenham.c	\
-		p_para.c		\
-	  event.c			\
-	  affichage.c	\
+SRC = fdf.c				\
+	  fdf_data.c		\
+	  bresenham.c		\
+		projection.c	\
+	  event.c				\
+	  affichage.c		\
 	  fail.c
 OBJ = $(SRC:.c=.o)
 
