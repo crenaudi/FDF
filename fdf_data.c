@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 16:12:11 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 16:31:30 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ static int 	make_tab(int y, t_fdf *fdf)
 	int 	x;
 
 	ft_putstr("ok");
+	x = fdf->x_max;
+	y = fdf->y_max;
 	p = fdf->p;
 	if (!(fdf->tab_point = (t_point **)malloc(sizeof(t_point *) * fdf->y_max)))
 		return (0);
-	while (++y < fdf->y_max)
+	while (y--)
 	{
 		x = -1;
 		if (!(point = (t_point *)malloc(sizeof(t_point) * fdf->x_max)))
 			return (0);
 		fdf->tab_point[y] = point;
-		while (++x < fdf->x_max)
+		while (x--)
 		{
 			point[x].x = p->x;
 			point[x].y = p->y;
@@ -89,8 +91,10 @@ int		stock_fdf(int fd, t_fdf *fdf)
 		x = 0;
 		while (*line != '\0')
 		{
-			while (*line == ' ' && *line != '\0')
+			while (*line == ' ')
 				line++;
+			if (*line == '\0')
+				break;
 			coordonees(&line, fdf, x, y);
 			line++;
 			x++;
