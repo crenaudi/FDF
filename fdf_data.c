@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/11 17:22:47 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/14 15:21:04 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,31 @@ t_p		*add_point(int x, int y, int z)
 	t_p	*p;
 
 	p = (t_p *)malloc(sizeof(t_p) * 1);
-	p->x = x;
-	p->y = y;
-	p->z = z;
+	p->x = (double)x;
+	p->y = (double)y;
+	p->z = (double)z;
 	return (p);
 }
 
 static void	coordonees(char **line, t_fdf *fdf, int x, int y)
 {
 	t_p	*p;
-	t_p	*next;
+//	t_p	*last;
 	int	z;
 
 	z = ft_atoi(*line);
 	p = add_point(x, y, z);
-	next = fdf->p;
-	ft_putstr("A");
-	if (next == NULL)
+//	last = fdf->p;
+	ft_putnbr(p->z);
+	if (fdf->p == NULL)
 	{
-		ft_putstr("NULL");
 		fdf->p = p;
 	}
 	else
 	{
-		ft_putstr("next");
-		while (next->next != NULL)
-			next = next->next;
-		ft_putstr("validé");
-		next->next = p;
+//		while (last->next != NULL)
+//			last = last->next;
+		fdf->p->next = p;
 	}
 	while (z > 9)
 	{
@@ -80,10 +77,12 @@ static int 	make_tab(int y, t_fdf *fdf)
 int		stock_fdf(int fd, t_fdf *fdf)
 {
 	char	*line;
+	t_p		*p;
 	int		x;
 	int		y;
 
 	y = 0;
+	fdf->p = p;
 	while (get_next_line(fd, &line) == 1 || y == 6)
 	{
 		x = 0;
@@ -92,12 +91,14 @@ int		stock_fdf(int fd, t_fdf *fdf)
 			while (*line == ' ')
 				line++;
 			coordonees(&line, fdf, x, y);
-			ft_putstr("fini");
 			line++;
 			x++;
 		}
+		ft_putchar('\n');
 		y++;
 	}
+	ft_putstr("ok");
+	ft_putnbr(fdf->p->x);
 	fdf->x_max = x;
 	fdf->y_max = y;
 	make_tab(-1, fdf);
