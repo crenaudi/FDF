@@ -1,4 +1,15 @@
-#include <math.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   projection.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/15 16:19:28 by crenaudi          #+#    #+#             */
+/*   Updated: 2019/02/15 17:41:49 by crenaudi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/fdf.h"
 /*
 void converte_rot(t_point)
@@ -6,15 +17,6 @@ void converte_rot(t_point)
 	x = cos(delta.x) + sin(delta.x) * x;
 	y = cos(delta.y) - sin(delta.y) * y;
 }*/
-
-void donnees_coordonnees(t_point *coord, t_point origine)
-{
-	coord->x = origine.x;
-	coord->y = origine.y;
-	coord->z = origine.z;
-	coord->delta.x = -0.785398;
-	coord->delta.y = -0.785398;
-}
 
 int		converte(t_fdf *fdf)
 {
@@ -24,17 +26,21 @@ int		converte(t_fdf *fdf)
 	int		y;
 
 	y = -1;
-	x = -1;
-	ft_putstr("Hey");
 	if (!(coord = (t_point **)malloc(sizeof(t_point *) * fdf->y_max)))
 		return (ERROR);
 	while (++y < fdf->y_max)
 	{
 		if (!(point = (t_point *)malloc(sizeof(t_point) * fdf->x_max)))
 			return (ERROR);
+		coord[y] = point;
+		x = -1;
 		while (++x < fdf->x_max)
 		{
-			donnees_coordonnees(&coord[y][x], (*fdf).tab_point[y][x]);
+			point[x].x = fdf->tab_point[y][x].x;
+			point[x].y = fdf->tab_point[y][x].y;
+			point[x].z = fdf->tab_point[y][x].z;
+			point[x].delta.x = -0.785398;
+			point[x].delta.y = -0.785398;
 		}
 	}
 	affichage(fdf, coord);

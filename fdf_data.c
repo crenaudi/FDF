@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 16:31:30 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/15 16:52:34 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@ static int 	make_tab(int y, t_fdf *fdf)
 	t_p		*p;
 	int 	x;
 
-	ft_putstr("ok");
-	x = fdf->x_max;
 	y = fdf->y_max;
 	p = fdf->p;
 	if (!(fdf->tab_point = (t_point **)malloc(sizeof(t_point *) * fdf->y_max)))
 		return (0);
 	while (y--)
 	{
-		x = -1;
+		x = fdf->x_max;
 		if (!(point = (t_point *)malloc(sizeof(t_point) * fdf->x_max)))
 			return (0);
 		fdf->tab_point[y] = point;
