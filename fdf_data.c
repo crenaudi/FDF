@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/15 16:52:34 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/15 18:12:05 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int		stock_fdf(int fd, t_fdf *fdf)
 			line++;
 			x++;
 		}
-		ft_putchar('\n');
 		y++;
 	}
 	fdf->x_max = x;

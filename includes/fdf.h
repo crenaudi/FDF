@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:12:16 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/14 14:54:19 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:23:50 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ struct	s_fdf
 	struct s_point	**tab_point;
 	struct s_p		*p;
 	struct s_cam	*cam;
-	double			e;
+	double			scale;
 	double			color;
 	int				y_max;
 	int				x_max;
