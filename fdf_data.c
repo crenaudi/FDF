@@ -40,6 +40,7 @@ static void	coordonees(char **line, t_fdf *fdf, int x, int y)
 		p->next = fdf->p;
 		fdf->p = p;
 	}
+	z = abs(z);
 	while (z > 9)
 	{
 		z = z / 10;

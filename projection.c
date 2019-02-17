@@ -14,13 +14,20 @@
 
 void converte_rot(t_point *point)
 {
-	point->x = cos(point->delta.x) + sin(point->delta.x) * point->x;
-	point->y = cos(point->delta.y) - sin(point->delta.y) * point->y;
+	/*
+	point->x = cos(point->delta.x) + sin(point->delta.y) * point->x;
+	point->y = cos(point->delta.y) - sin(point->delta.x) * point->y;
+	*/
+	point->x = (point->x * 1) + (point->y * 0) + (point->z * 0);
+	point->y = (point->x * 0) + (point->y * cos(point->delta.x)) + (point->z * sin(point->delta.x));
+	point->z = (point->x * 0) + (point->y * -sin(point->delta.x)) + (point->z * cos(point->delta.x));
+	point->x = point->x + 20;
+	point->y = point->y + 20;
 }
 
 void	scale(t_point *point, t_fdf *fdf)
 {
-	fdf->scale = 40;
+	fdf->scale = 20;
 	point->x = point->x * fdf->scale;
 	point->y = point->y * fdf->scale;
 }
@@ -46,7 +53,7 @@ int		converte(t_fdf *fdf)
 			point[x].x = fdf->tab_point[y][x].x;
 			point[x].y = fdf->tab_point[y][x].y;
 			point[x].z = fdf->tab_point[y][x].z;
-			point[x].delta.x = -0.785398;
+			point[x].delta.x = -1.5708;
 			point[x].delta.y = -0.785398;
 			converte_rot(&point[x]);
 			scale(&point[x], fdf);

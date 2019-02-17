@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 	mlx_putimage_to_window(data, fdf.win_ptr, 0, 0);
 */
 	fdf.color = 0xBE93C5;
-	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1024, 600, "mlx_42");
+	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1200, 600, "mlx_42");
 	stock_fdf(fd, &fdf);
 	converte(&fdf);
 	ft_putstr("ok");
