@@ -14,13 +14,9 @@
 
 void converte_rot(t_point *point)
 {
-	/*
-	point->x = cos(point->delta.x) + sin(point->delta.y) * point->x;
-	point->y = cos(point->delta.y) - sin(point->delta.x) * point->y;
-	*/
 	point->x = (point->x * 1) + (point->y * 0) + (point->z * 0);
-	point->y = (point->x * 0) + (point->y * cos(point->delta.x)) + (point->z * sin(point->delta.x));
-	point->z = (point->x * 0) + (point->y * -sin(point->delta.x)) + (point->z * cos(point->delta.x));
+	point->y = (point->x * 0) + (point->y * cos(point->delta.y)) + (point->z * sin(point->delta.y));
+	point->z = (point->x * 0) + (point->y * -sin(point->delta.y)) + (point->z * cos(point->delta.y));
 	point->x = point->x + 20;
 	point->y = point->y + 20;
 }
