@@ -12,12 +12,18 @@
 
 NAME = fdf
 CC = cc
-LIB = -L./libft/ -lft
-LIB_MATH = -lm
+CFLAGS = -Wall -Wextra
+CFLAGS += -I./$(LIBGFX_FOLDER)
 MINILIBX = -I /usr/local/include/mlx.h -L /usr/local/lib/ -lmlx
 FRAMEWORK = -framework OpenGl -framework AppKit
-LIBFT_FOLDER = libft
+LIB_MATH = -lm
+LIBFT_FOLDER = includes/libft
+LIB = -L./$(LIBFT_FOLDER) -lft
 LIBFT = $(LIBFT_FOLDER)/libft.a
+LIBGFX_FOLDER = includes/libgfx
+LIB2 = -L./$(LIBGFX_FOLDER) -lft
+LIBGFX = $(LIBGFX_FOLDER)/gfx.a
+
 RM = rm -f
 SRC = fdf.c				\
 	  fdf_data.c		\
@@ -35,18 +41,23 @@ all: $(NAME)
 $(LIBFT):
 	make -sC $(LIBFT_FOLDER)
 
-$(NAME): $(OBJ) $(LIBFT)
-	@$(CC) -fsanitize=address -g3 $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(OBJ)
-	@echo "/// all fdf ok ///"
+$(LIBGFX):
+	make -sC $(LIBGFX_FOLDER)
+
+$(NAME): $(OBJ) $(LIBFT) $(LIBGFX)
+	@$(CC) -fsanitize=address -g3 $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(LIB2) $(LIBGFX) $(OBJ)
+	@echo "/// all fdf ///"
 
 clean:
 	@$(RM) $(OBJ)
 	make -sC $(LIBFT_FOLDER) clean
-	@echo "/// clean fdf ok ///"
+	make -sC $(LIBGFX_FOLDER) clean
+	@echo "/// clean fdf ///"
 
 fclean: clean
 	@$(RM) $(NAME)
 	make -sC $(LIBFT_FOLDER) fclean
-	@echo "/// fclean fdf ok ///"
+	make -sC $(LIBGFX_FOLDER) fclean
+	@echo "/// fclean fdf ///"
 
 re: fclean all

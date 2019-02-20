@@ -17,9 +17,6 @@ int		main(int argc, char **argv)
 	t_fdf	fdf;
 	int		fd;
 
-	int		x;
-	int		y;
-
 	if (argc != 2)
 	{
 		ft_putstr("Usage: ./fdf <filename>\n");

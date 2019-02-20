@@ -17,9 +17,9 @@ t_p		*add_point(int x, int y, int z)
 	t_p	*p;
 
 	p = (t_p *)malloc(sizeof(t_p) * 1);
-	p->x = (double)x;
-	p->y = (double)y;
-	p->z = (double)z;
+	p->x = (float)x;
+	p->y = (float)y;
+	p->z = (float)z;
 	p->next = NULL;
 	return (p);
 }
@@ -83,8 +83,8 @@ int		stock_fdf(int fd, t_fdf *fdf)
 	int		y;
 
 	y = 0;
-	fdf->p = p;
 	p = NULL;
+	fdf->p = p;
 	while (get_next_line(fd, &line) == 1)
 	{
 		x = 0;
