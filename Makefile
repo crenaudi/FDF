@@ -27,11 +27,9 @@ LIBGFX = $(LIBGFX_FOLDER)/gfx.a
 RM = rm -f
 SRC = fdf.c				\
 	  fdf_data.c		\
-	  bresenham.c		\
+	  trace.c				\
 		projection.c	\
-	  event.c				\
-	  affichage.c		\
-	  fail.c
+	  event.c
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all fclean re

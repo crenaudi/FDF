@@ -24,21 +24,21 @@ t_p		*add_point(int x, int y, int z)
 	return (p);
 }
 
-static void	coordonees(char **line, t_fdf *fdf, int x, int y)
+static void	coordonees(char **line, t_env *env, int x, int y)
 {
 	t_p	*p;
 	int	z;
 
 	z = ft_atoi(*line);
 	p = add_point(x, y, z);
-	if (fdf->p == NULL)
+	if (env->p == NULL)
 	{
-		fdf->p = p;
+		env->p = p;
 	}
 	else
 	{
-		p->next = fdf->p;
-		fdf->p = p;
+		p->next = env->p;
+		env->p = p;
 	}
 	z = abs(z);
 	while (z > 9)
@@ -48,22 +48,22 @@ static void	coordonees(char **line, t_fdf *fdf, int x, int y)
 	}
 }
 
-static int 	make_tab(int y, t_fdf *fdf)
+static int 	make_tab(int y, t_env *env)
 {
 	t_point *point;
 	t_p		*p;
 	int 	x;
 
-	y = fdf->y_max;
-	p = fdf->p;
-	if (!(fdf->tab_point = (t_point **)malloc(sizeof(t_point *) * fdf->y_max)))
-		return (0);
+	y = env->y_max;
+	p = env->p;
+	if (!(env->tab_point = (t_point **)malloc(sizeof(t_point *) * env->y_max)))
+		return (ERROR);
 	while (y--)
 	{
-		x = fdf->x_max;
-		if (!(point = (t_point *)malloc(sizeof(t_point) * fdf->x_max)))
-			return (0);
-		fdf->tab_point[y] = point;
+		x = env->x_max;
+		if (!(point = (t_point *)malloc(sizeof(t_point) * env->x_max)))
+			return (ERROR);
+		env->tab_point[y] = point;
 		while (x--)
 		{
 			point[x].x = p->x;
@@ -72,10 +72,10 @@ static int 	make_tab(int y, t_fdf *fdf)
 			p = p->next;
 		}
 	}
-	return (0);
+	return (SUCCESS);
 }
 
-int		stock_fdf(int fd, t_fdf *fdf)
+int		stock_env(int fd, t_env *env)
 {
 	char	*line;
 	t_p		*p;
@@ -84,7 +84,7 @@ int		stock_fdf(int fd, t_fdf *fdf)
 
 	y = 0;
 	p = NULL;
-	fdf->p = p;
+	env->p = p;
 	while (get_next_line(fd, &line) == 1)
 	{
 		x = 0;
@@ -94,14 +94,14 @@ int		stock_fdf(int fd, t_fdf *fdf)
 				line++;
 			if (*line == '\0')
 				break;
-			coordonees(&line, fdf, x, y);
+			coordonees(&line, env, x, y);
 			line++;
 			x++;
 		}
 		y++;
 	}
-	fdf->x_max = x;
-	fdf->y_max = y;
-	make_tab(-1, fdf);
-	return (1);
+	env->x_max = x;
+	env->y_max = y;
+	make_tab(-1, env);
+	return (SUCCESS);
 }

@@ -21,70 +21,72 @@
 # include "libft.h"
 # include "gfx.h"
 
-# define ERROR -1
-# define SUCCESS 0
-// utiliser << plutot
-//# define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
-# define ESC			53
-# define LEFT		123
-# define RIGHT		124
-# define UP			126
-# define DOWN		125
-# define L_MOUSSE	1
-# define	R_MOUSSE	2
-# define SCROLL_UP	5
-# define SCROLL_DOWN	7
+# define ERROR 				-1
+# define SUCCESS			0
+# define ESC					53
+# define LEFT					123
+# define RIGHT				124
+# define UP						126
+# define DOWN					125
+# define ZOOM					116
+# define DZOOM				121
+# define MOREH				115
+# define LESSH				119
 
-//foreward declaretion
-//typedef int t_vec2 __attribute__((ext_vector_type(2)));
-//typedef double t_vec3 __attribute__((ext_vector_type(3)));
 
-typedef struct	s_fdf					t_fdf;
-typedef struct	s_p						t_p;
-//typedef t_vec3								t_point;
-typedef struct	s_bresenham		t_bresenham;
+typedef struct	s_env			t_env;
+typedef struct	s_p				t_p;
+typedef struct	s_trace		t_trace;
+typedef struct	s_img			t_img;
 
-struct	s_fdf
+
+struct	s_env
 {
-	void					*mlx_ptr;
-	void					*win_ptr;
-	void					*img_ptr;
-	char					*img;
-	int						bpp;
-	int						sl;
-	int						endian;
-	t_point 			**tab_point;
-	struct s_p		*p;
-	struct s_cam	*cam;
-	float				scale;
-	float				color;
-	t_vec3				rot_map;
-	int						y_max;
-	int						x_max;
+	void						*mlx_ptr;
+	void						*win_ptr;
+	void						*img_ptr;
+	struct s_img		*img;
+	t_point 				**tab_point;
+	struct s_p			*p;
+	float						scale;
+	struct s_color	color;
+	t_vec3					rot_map;
+	t_vec3					c;
+	int							y_max;
+	int							x_max;
 };
 
 struct	s_p
 {
-	float			x;
-	float			y;
-	float			z;
+	float				x;
+	float				y;
+	float				z;
 	struct s_p	*next;
 };
 
-struct	s_bresenham
+struct	s_trace
 {
-	t_vec2	p1;
-	t_vec2	p2;
-	t_vec2	dir;
-	t_vec2	sens;
+	t_vec2					p1;
+	t_vec2					p2;
+	t_vec2					dir;
+	t_vec2					sens;
+	float							t;
+	struct s_color	color;
 };
 
-int			deal_key(int key, void *param);
-int			deal_mouse(int button, void *param);
+struct	s_img
+{
+	char		*data;
+	int			bpp;
+	int			sl;
+	int			endian;
+};
+
+int			event(int key, void *param);
 void		is_error(int i);
-int			stock_fdf(int fd, t_fdf *fdf);
-int			converte(t_fdf *fdf);
-int			affichage(t_fdf *fdf, t_point **coord);
-void		line(t_fdf *fdf, t_point p1, t_point ip2);
+int			stock_env(int fd, t_env *env);
+int			converte(t_env *env);
+int			affichage(t_env *env, t_point **coord);
+int			trace(t_env *env, t_point **coord);
 
 #endif

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bresenham.c                                        :+:      :+:    :+:   */
+/*   trace.c  		                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,38 +12,45 @@
 
 #include "includes/fdf.h"
 /*
-int		color(double t)
+static void fill_pixel(t_env *env, int x, int y, int color)
 {
-	return(RGB(
-				127.5 * (cos(t) + 1),
-				127.5 * (sin(t) + 1),
-				127.5 * (1 - cos(t))));
+	env->img[(y * env->sl) + x] = (char)color;
 }
 */
 
-static void		init_bresenham(t_bresenham *b, t_point p1, t_point p2)
+
+static void	init_trace(t_trace *b, t_point p1, t_point p2)
 {
+	t_color	color;
+
+	ft_bzero(&color, sizeof(color));
+	ft_bzero(b, sizeof(t_trace));
 	b->p1 = (t_vec2){(int)p1.x, (int)p1.y};
 	b->p2 = (t_vec2){(int)p2.x, (int)p2.y};
 	b->dir.x = abs(b->p2.x - b->p1.x);
 	b->dir.y = abs(b->p2.y - b->p1.y);
 	b->sens.x = b->p1.x < b->p2.x ? 1 : -1;
 	b->sens.y = b->p1.y < b->p2.y ? 1 : -1;
+	b->color = init_color(color, 0x336699);
+	b->t = 0;
 }
 
-void	line(t_fdf *fdf, t_point p1, t_point p2)
+static void	line(t_env *env, t_point p1, t_point p2)
 {
-	t_bresenham		b;
-	int err;
-	int e2;
+	t_trace	b;
+	int 		err;
+	int 		e2;
 
-	init_bresenham(&b, p1, p2);
+	init_trace(&b, p1, p2);
 	err = (b.dir.x > b.dir.y ? b.dir.x : -b.dir.y) / 2;
 	e2 = 0;
 	while ("OUIIIIIIIIIII")
 	{
-		//fdf->color = color(fdf->color);
-		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, b.p1.x, b.p1.y, 0xFFFFFF);
+		b.t = interpolation(b.t, (int)p1.x, (int)p2.x);
+		//ft_print_bits(lerp_color(env->color, b.color, b.t), 32, 8);
+		//ft_putchar('\n');
+		//fill_pixel(env.img, 0, 0, lerp_color(0x000000, 0xFFFFFF, t));
+		mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y, lerp_color(env->color, b.color, b.t));
 		if (b.p1.x == b.p2.x && b.p1.y == b.p2.y)
 			return ;
 		e2 = err;
@@ -58,4 +65,24 @@ void	line(t_fdf *fdf, t_point p1, t_point p2)
 			b.p1.y += b.sens.y;
 		}
 	}
+}
+
+int		trace(t_env *env, t_point **coord)
+{
+	int			x;
+	int			y;
+
+	y = -1;
+	while (++y < env->y_max)
+	{
+		x = -1;
+		while (++x < env->x_max)
+		{
+			if (x < (env->x_max - 1))
+				line(env, coord[y][x], coord[y][x + 1]);
+			if (y < (env->y_max - 1))
+				line(env, coord[y][x], coord[y + 1][x]);
+		}
+	}
+	return (SUCCESS);
 }

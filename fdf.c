@@ -9,37 +9,67 @@
 /*   Updated: 2019/02/15 19:24:28 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h>
 #include "includes/fdf.h"
+
+static void init_env(t_env *env)
+{
+	t_color color;
+
+	ft_bzero(&color, sizeof(t_color));
+	env->rot_map.x = deg2rad(-45);
+	env->rot_map.y = deg2rad(-25);
+	env->rot_map.z = deg2rad(25);
+	env->scale = (float)20;
+	env->c.x = (float)8.0;
+	env->c.y = (float)44.0;
+	env->c.z = (float)0.0;
+	env->color = init_color(color, 0xFFFFFF);
+}
+/*
+void init_img(t_env *env)
+{
+	t_img *img;
+
+	ft_bzero(&img, sizeof(t_img));
+	img->data = mlx_new_image(img.data, y, x);
+	mlx_get_data_addr(img->data, &img->bpp, &img->sl, &img->endian);
+	fdf->img = img;
+}
+*/
+int	generate(t_env *env)
+{
+	converte(env);
+	//mlx_put_image_to_window(env, env->img, env->win_ptr, 0, 0);
+	return (SUCCESS);
+}
 
 int		main(int argc, char **argv)
 {
-	t_fdf	fdf;
-	int		fd;
+	t_env		env;
+	int			fd;
+	int			x;
+	int			y;
 
+	y = 1200;
+	x = 600;
 	if (argc != 2)
 	{
-		ft_putstr("Usage: ./fdf <filename>\n");
+		ft_putstr("Usage: ./env <filename>\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (fd < 0 || ft_strstr(argv[1], ".fdf") == 0)
 		is_error(-1);
-	ft_bzero(&fdf, sizeof(t_fdf));
-	fdf.mlx_ptr = mlx_init();
 
-/* PRINT IMAGE
-	fdf.img = mlx_new_image(fdf.img, 200, 200);
-	fdf.img = mlx_get_data_addr(fdf.img, &fdf.bpp, &fdf.sl, &fdf.endian);
-	fill_pixel(fdf.img, 0, 0, 0xFFFFFF);
-	mlx_putimage_to_window(data, fdf.win_ptr, 0, 0);
-*/
-	fdf.color = 0xBE93C5;
-	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1200, 600, "mlx_42");
-	stock_fdf(fd, &fdf);
-	converte(&fdf);
-	ft_putstr("ok");
-	mlx_key_hook(fdf.win_ptr, deal_key, (void *)0);
-	mlx_loop(fdf.mlx_ptr);
+	init_env(&env);
+	env.mlx_ptr = mlx_init();
+	env.win_ptr = mlx_new_window(env.mlx_ptr, y, x, "mlx_42");
+	stock_env(fd, &env);
+	//init_img(&env);
+
+	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
+	mlx_key_hook(env.win_ptr, event, (void *)&env);
+	mlx_loop(env.mlx_ptr);
 	return (0);
 }
