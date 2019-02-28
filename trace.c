@@ -46,7 +46,7 @@ static void	line(t_env *env, t_point p1, t_point p2)
 	e2 = 0;
 	while ("OUIIIIIIIIIII")
 	{
-		b.t = interpolation(b.t, (int)p1.x, (int)p2.x);
+		b.t = interpolation(b.t, p1.x, p2.x);
 		//ft_print_bits(lerp_color(env->color, b.color, b.t), 32, 8);
 		//ft_putchar('\n');
 		//fill_pixel(env.img, 0, 0, lerp_color(0x000000, 0xFFFFFF, t));
