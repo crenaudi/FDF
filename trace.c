@@ -32,12 +32,13 @@ static void	init_trace(t_trace *b, t_point p1, t_point p2)
 	b->sens.x = b->p1.x < b->p2.x ? 1 : -1;
 	b->sens.y = b->p1.y < b->p2.y ? 1 : -1;
 	b->color = init_color(color, 0x336699);
-	b->t = 0;
+	b->t = vec2_dist(b->p2 - b->p1);
 }
 
 static void	line(t_env *env, t_point p1, t_point p2)
 {
 	t_trace	b;
+	float		t2;
 	int 		err;
 	int 		e2;
 
@@ -46,11 +47,9 @@ static void	line(t_env *env, t_point p1, t_point p2)
 	e2 = 0;
 	while ("OUIIIIIIIIIII")
 	{
-		b.t = interpolation(b.t, p1.x, p2.x);
-		//ft_print_bits(lerp_color(env->color, b.color, b.t), 32, 8);
-		//ft_putchar('\n');
+		t2 = vec2_dist(b.p2 - b.p1);
 		//fill_pixel(env.img, 0, 0, lerp_color(0x000000, 0xFFFFFF, t));
-		mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y, lerp_color(env->color, b.color, b.t));
+		mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y, lerp_color(env->color, b.color, (t2 / b.t)));
 		if (b.p1.x == b.p2.x && b.p1.y == b.p2.y)
 			return ;
 		e2 = err;

@@ -16,7 +16,8 @@ struct  s_color
   int   color;
 };
 
-float   interpolation(float t, float a, float b);
+float   vec2_dist(t_vec2 v2);
+//float   interpolation(float t, float a, float b);
 t_color init_color(t_color c, int color);
 int     lerp_color(t_color a, t_color b, float t);
 float   deg2rad(float d);

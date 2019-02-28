@@ -1,20 +1,16 @@
 #include <stdio.h>
 #include "gfx.h"
 
-/*
-int lenght()
+float vec2_dist(t_vec2 v2)
 {
+     return (sqrt(v2.x * v2.x + v2.y * v2.y));
 }
-*/
+/*
 float interpolation(float t, float a, float b)
 {
-  if (t == a)
-    return (0);
-  if (t == b)
-    return (1);
-  return ((t - a) / (b - a));
+  return ((d1 - d2) / (b - a));
 }
-
+*/
 t_color init_color(t_color c, int color)
 {
   int     mask;
@@ -35,10 +31,10 @@ int lerp_color(t_color s, t_color e, float t)
 
   if (s.color == e.color)
     return (s.color);
-  r = s.r + ((e.r - s.r) * t);
-  g = s.g + ((e.g - s.g) * t);
-  b = s.b + ((e.b - s.b) * t);
-  return (r << 16 | g << 8 | b);
+  r = s.r + (e.r - s.r) * t;
+  g = s.g + (e.g - s.g) * t;
+  b = s.b + (e.b - s.b) * t;
+  return (((r << 16) & 0xFF) | ((g << 8) & 0xFF) | (b & 0xFF));
 }
 
 float deg2rad(float d)
