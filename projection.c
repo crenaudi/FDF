@@ -12,6 +12,19 @@
 
 #include "includes/fdf.h"
 
+static void clean_tab(t_point **coord)
+{
+	int i;
+
+	i = 0;
+	while (coord[i])
+	{
+		free(coord[i]);
+		i++;
+	}
+	free(coord);
+}
+
 int		converte(t_env *env)
 {
 	t_point	**coord;
@@ -30,9 +43,9 @@ int		converte(t_env *env)
 		x = -1;
 		while (++x < env->x_max)
 		{
-			point[x].x = (env->tab_point[y][x].x - (env->x_max / 2)) + env->c.x;
-			point[x].y = (env->tab_point[y][x].y - (env->y_max / 2)) + env->c.y;
-			point[x].z = env->tab_point[y][x].z + env->c.z;
+			point[x].x = (env->tab_p[y][x].x - (env->x_max / 2)) + env->c.x;
+			point[x].y = (env->tab_p[y][x].y - (env->y_max / 2)) + env->c.y;
+			point[x].z = env->tab_p[y][x].z + env->c.z;
 			scale(&point[x], env->scale);
 			rotate_x(&point[x], env->rot_map.x);
 			rotate_y(&point[x], env->rot_map.y);
@@ -40,5 +53,6 @@ int		converte(t_env *env)
 		}
 	}
 	trace(env, coord);
+	clean_tab(coord);
 	return (SUCCESS);
 }

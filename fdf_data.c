@@ -30,11 +30,11 @@ static void	coordonees(char **line, t_env *env, int x, int y)
 	int	z;
 
 	z = ft_atoi(*line);
+	env->z_min = (float)(z < env->z_min ? z : env->z_min);
+	env->z_max = (float)(z > env->z_max ? z : env->z_max);
 	p = add_point(x, y, z);
 	if (env->p == NULL)
-	{
 		env->p = p;
-	}
 	else
 	{
 		p->next = env->p;
@@ -56,14 +56,14 @@ static int 	make_tab(int y, t_env *env)
 
 	y = env->y_max;
 	p = env->p;
-	if (!(env->tab_point = (t_point **)malloc(sizeof(t_point *) * env->y_max)))
+	if (!(env->tab_p = (t_point **)malloc(sizeof(t_point *) * env->y_max)))
 		return (ERROR);
 	while (y--)
 	{
 		x = env->x_max;
 		if (!(point = (t_point *)malloc(sizeof(t_point) * env->x_max)))
 			return (ERROR);
-		env->tab_point[y] = point;
+		env->tab_p[y] = point;
 		while (x--)
 		{
 			point[x].x = p->x;

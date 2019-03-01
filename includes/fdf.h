@@ -46,7 +46,7 @@ struct	s_env
 	void						*win_ptr;
 	void						*img_ptr;
 	struct s_img		*img;
-	t_point 				**tab_point;
+	t_point 				**tab_p;
 	struct s_p			*p;
 	float						scale;
 	struct s_color	color;
@@ -54,6 +54,11 @@ struct	s_env
 	t_vec3					c;
 	int							y_max;
 	int							x_max;
+	float						z_min;
+	float						z_max;
+	float						x;
+	float						y;
+	float 					bertrand;
 };
 
 struct	s_p
@@ -71,7 +76,8 @@ struct	s_trace
 	t_vec2					dir;
 	t_vec2					sens;
 	float							t;
-	struct s_color	color;
+	struct s_color	c1;
+	struct s_color	c2;
 };
 
 struct	s_img

@@ -20,6 +20,7 @@ float   vec2_dist(t_vec2 v2);
 //float   interpolation(float t, float a, float b);
 t_color init_color(t_color c, int color);
 int     lerp_color(t_color a, t_color b, float t);
+int     lerp_non_init_color(t_color color, int s, int e, float t);
 float   deg2rad(float d);
 float   rad2deg(float r);
 void    scale(t_point *p, float e);

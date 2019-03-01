@@ -18,7 +18,7 @@ t_color init_color(t_color c, int color)
   mask = 0xFF;
   c.r = (color >> 16) & mask;
   c.g = (color >> 8) & mask;
-  c.b = (color >> 0) & mask;
+  c.b = color & mask;
   c.color = color;
   return (c);
 }
@@ -31,10 +31,15 @@ int lerp_color(t_color s, t_color e, float t)
 
   if (s.color == e.color)
     return (s.color);
-  r = s.r + (e.r - s.r) * t;
-  g = s.g + (e.g - s.g) * t;
-  b = s.b + (e.b - s.b) * t;
-  return (((r << 16) & 0xFF) | ((g << 8) & 0xFF) | (b & 0xFF));
+  r = (int)(s.r + (e.r - s.r) * t);
+  g = (int)(s.g + (e.g - s.g) * t);
+  b = (int)(s.b + (e.b - s.b) * t);
+  return (((r & 0xFF) << 16) | ((g  & 0xFF) << 8) | (b & 0xFF));
+}
+
+int lerp_non_init_color(t_color color, int s, int e, float t)
+{
+  return (lerp_color(init_color(color, s), init_color(color, e), t));
 }
 
 float deg2rad(float d)

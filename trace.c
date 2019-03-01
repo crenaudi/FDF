@@ -19,7 +19,7 @@ static void fill_pixel(t_env *env, int x, int y, int color)
 */
 
 
-static void	init_trace(t_trace *b, t_point p1, t_point p2)
+static void	init_trace(t_trace *b, t_point p1, t_point p2, float z1, float z2)
 {
 	t_color	color;
 
@@ -31,25 +31,33 @@ static void	init_trace(t_trace *b, t_point p1, t_point p2)
 	b->dir.y = abs(b->p2.y - b->p1.y);
 	b->sens.x = b->p1.x < b->p2.x ? 1 : -1;
 	b->sens.y = b->p1.y < b->p2.y ? 1 : -1;
-	b->color = init_color(color, 0x336699);
+	b->c1 = z1 != 0.0 ? init_color(color, lerp_non_init_color(color, 0x000000,
+		0x336699, z1)) : init_color(color, 0x000000);
+	b->c2 = z2 != 0.0 ? init_color(color, lerp_non_init_color(color, 0x000000,
+		0x336699, z2)) : init_color(color, 0x000000);
 	b->t = vec2_dist(b->p2 - b->p1);
 }
 
-static void	line(t_env *env, t_point p1, t_point p2)
+static void	line(t_env *env, t_point p1, t_point p2, float z1, float z2)
 {
 	t_trace	b;
 	float		t2;
 	int 		err;
 	int 		e2;
 
-	init_trace(&b, p1, p2);
+	init_trace(&b, p1, p2, z1, z2);
+
 	err = (b.dir.x > b.dir.y ? b.dir.x : -b.dir.y) / 2;
 	e2 = 0;
 	while ("OUIIIIIIIIIII")
 	{
 		t2 = vec2_dist(b.p2 - b.p1);
-		//fill_pixel(env.img, 0, 0, lerp_color(0x000000, 0xFFFFFF, t));
-		mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y, lerp_color(env->color, b.color, (t2 / b.t)));
+		/*
+		if (p1.z > 0)
+			fill_pixel(env.img->data, b.p1.x, b.p1.y, color);
+		*/
+		mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y,
+			lerp_color(b.c1, b.c2, fmod((t2 / b.t) + env->bertrand, 1.0)));
 		if (b.p1.x == b.p2.x && b.p1.y == b.p2.y)
 			return ;
 		e2 = err;
@@ -66,6 +74,11 @@ static void	line(t_env *env, t_point p1, t_point p2)
 	}
 }
 
+static float	lerp_z(t_env *env, float z)
+{
+	return ((z - env->z_min) / (env->z_max - env->z_min));
+}
+
 int		trace(t_env *env, t_point **coord)
 {
 	int			x;
@@ -77,10 +90,18 @@ int		trace(t_env *env, t_point **coord)
 		x = -1;
 		while (++x < env->x_max)
 		{
-			if (x < (env->x_max - 1))
-				line(env, coord[y][x], coord[y][x + 1]);
-			if (y < (env->y_max - 1))
-				line(env, coord[y][x], coord[y + 1][x]);
+			if ((x < (env->x_max - 1)) && (((env->tab_p[y][x].x <= env->x)
+				&& (env->tab_p[y][x].x >= 0)) || ((env->tab_p[y][x + 1].x <= env->x)
+				&& (env->tab_p[y][x + 1].x >= 0))))
+				line(env, coord[y][x], coord[y][x + 1],
+					lerp_z(env, env->tab_p[y][x].z),
+					lerp_z(env, env->tab_p[y][x + 1].z));
+			if ((y < (env->y_max - 1)) && (((env->tab_p[y][x].x <= env->x)
+				&& (env->tab_p[y][x].x >= 0)) || ((env->tab_p[y + 1][x].x <= env->x)
+				&& (env->tab_p[y + 1][x].x >= 0))))
+				line(env, coord[y][x], coord[y + 1][x],
+					lerp_z(env, env->tab_p[y][x].z),
+					lerp_z(env, env->tab_p[y + 1][x].z));
 		}
 	}
 	return (SUCCESS);
