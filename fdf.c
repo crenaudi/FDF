@@ -14,14 +14,13 @@
 
 void init_img(t_env *env)
 {
-	t_img img;
+	static t_img img;
 
 	ft_bzero(&img, sizeof(t_img));
 	img.ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
-	mlx_get_data_addr(img.ptr, &img.bpp, &img.sl, &img.endian);
+	img.data = mlx_get_data_addr(img.ptr, &img.bpp, &img.sl, &img.endian);
 	img.bpp /= 8;
 	env->img = &img;
-	ft_putstr("img ok");
 }
 
 static void init_env(t_env *env)

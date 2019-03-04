@@ -14,8 +14,7 @@
 
 static void fill_pixel(t_img *img, int x, int y, int color)
 {
-	*(int *)(img->ptr + ((x + y * W_WIDTH) * img->bpp)) = color;
-	ft_putstr(" Fill img ok ");
+	*(int *)(img->data + ((x + y * W_WIDTH) * img->bpp)) = color;
 }
 
 static void	init_trace(t_trace *b, t_point p1, t_point p2, float z1, float z2)
