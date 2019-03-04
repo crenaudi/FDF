@@ -42,7 +42,7 @@ int	generate(t_env *env)
 {
 	converte(env);
 	env->bertrand += 0.05;
-	mlx_put_image_to_window(env, env->img, env->win_ptr, 0, 0);
+	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img, 0, 0);
 	return (SUCCESS);
 }
 
@@ -57,7 +57,7 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
-	if (fd < 0 || ft_strstr(argv[1], ".fdf") == 0)
+	if (fd < 0 || ft_strcmp(ft_strstr(argv[1], ".fdf"), ".fdf") != 0)
 		is_error(-1);
 
 	init_env(&env);
