@@ -80,7 +80,7 @@ struct	s_trace
 struct s_img
 {
 	void 	*ptr;
-	char	*data;
+	int 	*data;
 	int		bpp;
 	int		sl;
 	int		endian;

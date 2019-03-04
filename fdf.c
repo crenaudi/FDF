@@ -12,22 +12,20 @@
 #include <stdio.h>
 #include "includes/fdf.h"
 
-void init_img(t_env *env)
-{
-	static t_img img;
-
-	ft_bzero(&img, sizeof(t_img));
-	img.ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
-	img.data = mlx_get_data_addr(img.ptr, &img.bpp, &img.sl, &img.endian);
-	img.bpp /= 8;
-	env->img = &img;
-}
-
 static void init_env(t_env *env)
 {
 	t_color color;
+	static t_img img;
 
+	ft_bzero(env, sizeof(t_env));
 	ft_bzero(&color, sizeof(t_color));
+	ft_bzero(&img, sizeof(t_img));
+	env->mlx_ptr = mlx_init();
+	env->win_ptr = mlx_new_window(env->mlx_ptr, W_WIDTH, W_HEIGHT, "mlx_42");
+	env->color = init_color(color, 0x000000);
+	img.ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
+	img.data = (int *)(mlx_get_data_addr(img.ptr, &img.bpp, &img.sl, &img.endian));
+	env->img = &img;
 	env->rot_map.x = deg2rad(-45);
 	env->rot_map.y = deg2rad(-25);
 	env->rot_map.z = deg2rad(25);
@@ -35,7 +33,6 @@ static void init_env(t_env *env)
 	env->c.x = (float)8.0;
 	env->c.y = (float)44.0;
 	env->c.z = (float)0.0;
-	env->color = init_color(color, 0x000000);
 	env->z_min = 0.0;
 	env->z_max = 0.0;
 	env->bertrand = 0;
@@ -43,7 +40,6 @@ static void init_env(t_env *env)
 
 int	generate(t_env *env)
 {
-	init_img(env);
 	converte(env);
 	env->bertrand += 0.05;
 	mlx_put_image_to_window(env, env->img, env->win_ptr, 0, 0);
@@ -65,11 +61,7 @@ int		main(int argc, char **argv)
 		is_error(-1);
 
 	init_env(&env);
-	env.mlx_ptr = mlx_init();
-	env.win_ptr = mlx_new_window(env.mlx_ptr, W_WIDTH, W_HEIGHT, "mlx_42");
 	stock_env(fd, &env);
-	//init_img(&env);
-
 	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
 	mlx_key_hook(env.win_ptr, event, (void *)&env);
 	mlx_loop(env.mlx_ptr);
