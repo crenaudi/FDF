@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-/*
-static void fill_pixel(t_env *env, int x, int y, int color)
-{
-	env->img[(y * env->sl) + x] = (char)color;
-}
-*/
 
+static void fill_pixel(t_img *img, int x, int y, int color)
+{
+	*(int *)(img->ptr + ((x + y * W_WIDTH) * img->bpp)) = color;
+	ft_putstr(" Fill img ok ");
+}
 
 static void	init_trace(t_trace *b, t_point p1, t_point p2, float z1, float z2)
 {
@@ -52,12 +51,10 @@ static void	line(t_env *env, t_point p1, t_point p2, float z1, float z2)
 	while ("OUIIIIIIIIIII")
 	{
 		t2 = vec2_dist(b.p2 - b.p1);
-		/*
-		if (p1.z > 0)
-			fill_pixel(env.img->data, b.p1.x, b.p1.y, color);
-		*/
-		mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y,
-			lerp_color(b.c1, b.c2, fmod((t2 / b.t) + env->bertrand, 1.0)));
+		fill_pixel(env->img, b.p1.x, b.p1.y,
+			lerp_color(b.c2, b.c1, fmod((t2 / b.t) + env->bertrand, 1.0)));
+		//mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y,
+			//lerp_color(b.c2, b.c1, fmod((t2 / b.t) + env->bertrand, 1.0)));
 		if (b.p1.x == b.p2.x && b.p1.y == b.p2.y)
 			return ;
 		e2 = err;
@@ -90,19 +87,20 @@ int		trace(t_env *env, t_point **coord)
 		x = -1;
 		while (++x < env->x_max)
 		{
-			if ((x < (env->x_max - 1)) && (((env->tab_p[y][x].x <= env->x)
-				&& (env->tab_p[y][x].x >= 0)) || ((env->tab_p[y][x + 1].x <= env->x)
+			if ((x < (env->x_max - 1)) && (((env->tab_p[y][x].x <= W_HEIGHT)
+				&& (env->tab_p[y][x].x >= 0)) || ((env->tab_p[y][x + 1].x <= W_HEIGHT)
 				&& (env->tab_p[y][x + 1].x >= 0))))
 				line(env, coord[y][x], coord[y][x + 1],
 					lerp_z(env, env->tab_p[y][x].z),
 					lerp_z(env, env->tab_p[y][x + 1].z));
-			if ((y < (env->y_max - 1)) && (((env->tab_p[y][x].x <= env->x)
-				&& (env->tab_p[y][x].x >= 0)) || ((env->tab_p[y + 1][x].x <= env->x)
+			if ((y < (env->y_max - 1)) && (((env->tab_p[y][x].x <= W_HEIGHT)
+				&& (env->tab_p[y][x].x >= 0)) || ((env->tab_p[y + 1][x].x <= W_HEIGHT)
 				&& (env->tab_p[y + 1][x].x >= 0))))
 				line(env, coord[y][x], coord[y + 1][x],
 					lerp_z(env, env->tab_p[y][x].z),
 					lerp_z(env, env->tab_p[y + 1][x].z));
 		}
+		mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img->ptr, 0, 0);
 	}
 	return (SUCCESS);
 }

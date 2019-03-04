@@ -12,7 +12,19 @@
 #include <stdio.h>
 #include "includes/fdf.h"
 
-static void init_env(t_env *env, int x, int y)
+void init_img(t_env *env)
+{
+	t_img img;
+
+	ft_bzero(&img, sizeof(t_img));
+	img.ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
+	mlx_get_data_addr(img.ptr, &img.bpp, &img.sl, &img.endian);
+	img.bpp /= 8;
+	env->img = &img;
+	ft_putstr("img ok");
+}
+
+static void init_env(t_env *env)
 {
 	t_color color;
 
@@ -27,26 +39,15 @@ static void init_env(t_env *env, int x, int y)
 	env->color = init_color(color, 0x000000);
 	env->z_min = 0.0;
 	env->z_max = 0.0;
-	env->x = (float)x;
-	env->y = (float)y;
 	env->bertrand = 0;
 }
-/*
-void init_img(t_env *env)
-{
-	t_img *img;
 
-	ft_bzero(&img, sizeof(t_img));
-	img->data = mlx_new_image(img.data, y, x);
-	mlx_get_data_addr(img->data, &img->bpp, &img->sl, &img->endian);
-	fdf->img = img;
-}
-*/
 int	generate(t_env *env)
 {
+	init_img(env);
 	converte(env);
-	env->bertrand += 0.1;
-	//mlx_put_image_to_window(env, env->img, env->win_ptr, 0, 0);
+	env->bertrand += 0.05;
+	mlx_put_image_to_window(env, env->img, env->win_ptr, 0, 0);
 	return (SUCCESS);
 }
 
@@ -54,11 +55,7 @@ int		main(int argc, char **argv)
 {
 	t_env		env;
 	int			fd;
-	int			x;
-	int			y;
 
-	y = 1200;
-	x = 600;
 	if (argc != 2)
 	{
 		ft_putstr("Usage: ./env <filename>\n");
@@ -68,9 +65,9 @@ int		main(int argc, char **argv)
 	if (fd < 0 || ft_strstr(argv[1], ".fdf") == 0)
 		is_error(-1);
 
-	init_env(&env, x, y);
+	init_env(&env);
 	env.mlx_ptr = mlx_init();
-	env.win_ptr = mlx_new_window(env.mlx_ptr, y, x, "mlx_42");
+	env.win_ptr = mlx_new_window(env.mlx_ptr, W_WIDTH, W_HEIGHT, "mlx_42");
 	stock_env(fd, &env);
 	//init_img(&env);
 

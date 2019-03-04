@@ -23,6 +23,8 @@
 
 # define ERROR 				-1
 # define SUCCESS			0
+# define W_WIDTH			1200
+# define W_HEIGHT			600
 # define ESC					53
 # define LEFT					123
 # define RIGHT				124
@@ -33,31 +35,26 @@
 # define MOREH				115
 # define LESSH				119
 
-
 typedef struct	s_env			t_env;
 typedef struct	s_p				t_p;
 typedef struct	s_trace		t_trace;
 typedef struct	s_img			t_img;
 
-
 struct	s_env
 {
 	void						*mlx_ptr;
 	void						*win_ptr;
-	void						*img_ptr;
-	struct s_img		*img;
 	t_point 				**tab_p;
 	struct s_p			*p;
 	float						scale;
 	struct s_color	color;
+	struct s_img		*img;
 	t_vec3					rot_map;
 	t_vec3					c;
 	int							y_max;
 	int							x_max;
 	float						z_min;
 	float						z_max;
-	float						x;
-	float						y;
 	float 					bertrand;
 };
 
@@ -80,12 +77,13 @@ struct	s_trace
 	struct s_color	c2;
 };
 
-struct	s_img
+struct s_img
 {
-	char		*data;
-	int			bpp;
-	int			sl;
-	int			endian;
+	void 	*ptr;
+	char	*data;
+	int		bpp;
+	int		sl;
+	int		endian;
 };
 
 int			event(int key, void *param);

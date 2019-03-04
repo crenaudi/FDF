@@ -23,6 +23,12 @@ void	is_error(int i)
 		exit(EXIT_SUCCESS);
 }
 
+static void clear_img(t_env *env, t_img *img)
+{
+	ft_bzero(img, sizeof(t_img));
+	mlx_destroy_image(env->mlx_ptr, img->ptr);
+}
+
 int		event(int key, void *param)
 {
 	t_env *env;
@@ -49,6 +55,7 @@ int		event(int key, void *param)
 		env->c.z += (float)1;
 	if (key == LESSH)
 		env->c.z -= (float)1;
+	clear_img(env, env->img);
 	return (SUCCESS);
 }
 /*
