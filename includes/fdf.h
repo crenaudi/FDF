@@ -87,6 +87,7 @@ struct s_img
 };
 
 int			event(int key, void *param);
+void 		legend(t_env *env);
 void		is_error(int i);
 int			stock_env(int fd, t_env *env);
 int			converte(t_env *env);

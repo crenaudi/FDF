@@ -26,13 +26,13 @@ static void init_env(t_env *env)
 	img.ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
 	img.data = (int *)(mlx_get_data_addr(img.ptr, &img.bpp, &img.sl, &img.endian));
 	env->img = &img;
-	env->rot_map.x = deg2rad(-45);
+	env->rot_map.x = deg2rad(-25);
 	env->rot_map.y = deg2rad(-25);
 	env->rot_map.z = deg2rad(25);
 	env->scale = (float)20.0;
-	env->c.x = (float)8.0;
-	env->c.y = (float)44.0;
-	env->c.z = (float)0.0;
+	env->c.x = 0.0;
+	env->c.y = 0.0;
+	env->c.z = 0.0;
 	env->z_min = 0.0;
 	env->z_max = 0.0;
 	env->bertrand = 0;
@@ -43,6 +43,7 @@ int	generate(t_env *env)
 	converte(env);
 	env->bertrand += 0.05;
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img, 0, 0);
+	legend(env);
 	return (SUCCESS);
 }
 

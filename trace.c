@@ -55,7 +55,7 @@ static void	line(t_env *env, t_point p1, t_point p2, float z1, float z2)
 	while ("OUIIIIIIIIIII")
 	{
 		t2 = vec2_dist(b.p2 - b.p1);
-		fill_pixel(env->img, b.p1.x, b.p1.y,
+		fill_pixel(env->img, b.p1.x + (W_WIDTH / 2), b.p1.y + (W_HEIGHT / 2),
 			lerp_color(b.c2, b.c1, fmod((t2 / b.t) + env->bertrand, 1.0)));
 		//mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y,
 			//lerp_color(b.c2, b.c1, fmod((t2 / b.t) + env->bertrand, 1.0)));

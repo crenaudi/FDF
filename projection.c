@@ -43,8 +43,8 @@ int		converte(t_env *env)
 		x = -1;
 		while (++x < env->x_max)
 		{
-			point[x].x = (env->tab_p[y][x].x - (env->x_max / 2)) + env->c.x;
-			point[x].y = (env->tab_p[y][x].y - (env->y_max / 2)) + env->c.y;
+			point[x].x = (env->tab_p[y][x].x - (env->x_max / 2));
+			point[x].y = (env->tab_p[y][x].y - (env->y_max / 2));
 			point[x].z = env->tab_p[y][x].z + env->c.z;
 			scale(&point[x], env->scale);
 			rotate_x(&point[x], env->rot_map.x);
