@@ -24,7 +24,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) -g3 $(CFLAGS) $(SRC) -I .
+	@$(CC) -fsanitize=address -g3 $(CFLAGS) $(SRC) -I .
 	@$(AR) $(NAME) $(OBJ)
 	@$(RL) $(NAME)
 	@echo "/// all gfx ///"

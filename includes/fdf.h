@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:12:16 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/07 16:34:23 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:23:50 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
-# include "libft/libft.h"
-# include "libgfx/gfx.h"
+# include "libft.h"
+# include "gfx.h"
 
 # define ERROR 				-1
 # define SUCCESS			0
-# define W_WIDTH			1900
-# define W_HEIGHT			1000
-# define ESC				53
-# define P					0
-# define O					0
-# define LEFT				123
+# define W_WIDTH			1200
+# define W_HEIGHT			600
+# define P						35
+# define O						31
+# define ESC					53
+# define LEFT					123
 # define RIGHT				124
-# define UP					126
-# define DOWN				125
-# define ZOOM				116
+# define UP						126
+# define DOWN					125
+# define ZOOM					116
 # define DZOOM				121
 # define MOREH				115
 # define LESSH				119
@@ -44,20 +44,20 @@ typedef struct	s_img			t_img;
 
 struct	s_env
 {
-	void				*mlx_ptr;
-	void				*win_ptr;
-	t_point				**tab_p;
+	void						*mlx_ptr;
+	void						*win_ptr;
+	t_point 				**tab_p;
 	struct s_p			*p;
-	float				scale;
-	struct s_color		color;
+	float						scale;
+	struct s_color	color;
 	struct s_img		*img;
-	t_vec3				rot_map;
-	t_vec3				c;
-	int					y_max;
-	int					x_max;
-	float				z_min;
-	float				z_max;
-	float				bertrand;
+	t_vec3					rot_map;
+	t_vec3					c;
+	int							y_max;
+	int							x_max;
+	float						z_min;
+	float						z_max;
+	float 					bertrand;
 };
 
 struct	s_p
@@ -96,7 +96,7 @@ int			converte(t_env *env);
 int			affichage(t_env *env, t_point **coord);
 int			trace(t_env *env, t_point **coord);
 void		clean_tab(t_point **coord, int coord_y);
-void		clean_image(t_env *env);
+void		clean_image(t_env *env, t_img *img);
 void		parciel_clean_env(t_env *env);
 
 #endif

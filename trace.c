@@ -24,9 +24,6 @@ static void fill_pixel(t_img *img, int x, int y, int color)
 
 static void	init_trace(t_trace *b, t_point p1, t_point p2, float z1, float z2)
 {
-	t_color	color;
-
-	ft_bzero(&color, sizeof(color));
 	ft_bzero(b, sizeof(t_trace));
 	b->p1 = (t_vec2){(int)p1.x, (int)p1.y};
 	b->p2 = (t_vec2){(int)p2.x, (int)p2.y};
@@ -34,10 +31,10 @@ static void	init_trace(t_trace *b, t_point p1, t_point p2, float z1, float z2)
 	b->dir.y = abs(b->p2.y - b->p1.y);
 	b->sens.x = b->p1.x < b->p2.x ? 1 : -1;
 	b->sens.y = b->p1.y < b->p2.y ? 1 : -1;
-	b->c1 = z1 != 0.0 ? init_color(color, lerp_non_init_color(color, 0x000000,
-		0x336699, z1)) : init_color(color, 0x000000);
-	b->c2 = z2 != 0.0 ? init_color(color, lerp_non_init_color(color, 0x000000,
-		0x336699, z2)) : init_color(color, 0x000000);
+	b->c1 = z1 != 0.0 ? init_color(lerp_non_init_color(0x000000, 0x336699,
+		z1)) : init_color(0x000000);
+	b->c2 = z2 != 0.0 ? init_color(lerp_non_init_color(0x000000, 0x336699,
+		z2)) : init_color(0x000000);
 	b->t = vec2_dist(b->p2 - b->p1);
 }
 

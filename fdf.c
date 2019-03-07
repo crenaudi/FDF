@@ -14,15 +14,13 @@
 
 static void init_env(t_env *env)
 {
-	t_color color;
 	static t_img img;
 
 	ft_bzero(env, sizeof(t_env));
-	ft_bzero(&color, sizeof(t_color));
 	ft_bzero(&img, sizeof(t_img));
 	env->mlx_ptr = mlx_init();
 	env->win_ptr = mlx_new_window(env->mlx_ptr, W_WIDTH, W_HEIGHT, "mlx_42");
-	env->color = init_color(color, 0x000000);
+	env->color = init_color(0x000000);
 	img.ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
 	img.data = (int *)(mlx_get_data_addr(img.ptr, &img.bpp, &img.sl, &img.endian));
 	env->img = &img;

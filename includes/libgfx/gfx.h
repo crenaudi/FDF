@@ -2,6 +2,7 @@
 # define	GFX_H
 
 # include <math.h>
+# include "../libft/libft.h"
 
 typedef int t_vec2 __attribute__((ext_vector_type(2)));
 typedef float t_vec3 __attribute__((ext_vector_type(3)));
@@ -17,10 +18,9 @@ struct  s_color
 };
 
 float   vec2_dist(t_vec2 v2);
-//float   interpolation(float t, float a, float b);
-t_color init_color(t_color c, int color);
-int     lerp_color(t_color a, t_color b, float t);
-int     lerp_non_init_color(t_color color, int s, int e, float t);
+t_color init_color(int color);
+int     lerp_color(t_color s, t_color e, float t);
+int     lerp_non_init_color(int a, int b, float t);
 float   deg2rad(float d);
 float   rad2deg(float r);
 void    scale(t_point *p, float e);

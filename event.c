@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/07 16:36:14 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/02/09 14:29:04 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ void	is_error(int i)
 		exit(EXIT_SUCCESS);
 }
 
-static void clear_img(t_img *img)
-{
-	ft_bzero(img->data, W_WIDTH * W_HEIGHT * (img->bpp / 4));
-}
-
 int		event(int key, void *param)
 {
 	t_env *env;
@@ -54,6 +49,7 @@ int		event(int key, void *param)
 	{
 		parciel_clean_env(env);
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
+		ft_bzero(env, sizeof(t_env));
 		exit(0);
 	}
 	ft_putnbr(key);
@@ -61,7 +57,19 @@ int		event(int key, void *param)
 		env->scale += (float)0.5;
 	if (key == DZOOM)
 		env->scale -= (float)0.5;
-
+	if (key == P)
+	{
+		env->rot_map.x = deg2rad(-25);
+		env->rot_map.y = deg2rad(-25);
+		env->rot_map.z = deg2rad(25);
+	}
+	if (key == O)
+	{
+		env->rot_map.x = deg2rad(25);
+		env->rot_map.y = deg2rad(0);
+		env->rot_map.z = deg2rad(0);
+	}
+/*
 	if (key == UP)
 		env->c.y += (float)1;
 	if (key == DOWN)
@@ -70,13 +78,12 @@ int		event(int key, void *param)
 		env->c.x += (float)1;
 	if (key == LEFT)
 		env->c.x -= (float)1;
-
 	if (key == MOREH)
 		env->c.z += (float)1;
 	if (key == LESSH)
 		env->c.z -= (float)1;
-
-	clear_img(env->img);
+*/
+	ft_bzero(env->img->data, W_WIDTH * W_HEIGHT * (env->img->bpp / 4));
 	return (SUCCESS);
 }
 /*

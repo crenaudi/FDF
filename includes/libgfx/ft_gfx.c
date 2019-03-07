@@ -11,10 +11,12 @@ float interpolation(float t, float a, float b)
   return ((d1 - d2) / (b - a));
 }
 */
-t_color init_color(t_color c, int color)
+t_color init_color(int color)
 {
-  int     mask;
+  t_color   c;
+  int       mask;
 
+  ft_bzero(&c, sizeof(t_color));
   mask = 0xFF;
   c.r = (color >> 16) & mask;
   c.g = (color >> 8) & mask;
@@ -37,9 +39,9 @@ int lerp_color(t_color s, t_color e, float t)
   return (((r & 0xFF) << 16) | ((g  & 0xFF) << 8) | (b & 0xFF));
 }
 
-int lerp_non_init_color(t_color color, int s, int e, float t)
+int lerp_non_init_color(int a, int b, float t)
 {
-  return (lerp_color(init_color(color, s), init_color(color, e), t));
+  return (lerp_color(init_color(a), init_color(b), t));
 }
 
 float deg2rad(float d)

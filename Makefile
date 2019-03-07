@@ -6,7 +6,7 @@
 #    By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:13:30 by crenaudi          #+#    #+#              #
-#    Updated: 2019/03/07 16:39:45 by crenaudi         ###   ########.fr        #
+#    Updated: 2019/02/14 15:36:23 by crenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,11 @@ LIB2 = -L./$(LIBGFX_FOLDER) -lft
 LIBGFX = $(LIBGFX_FOLDER)/gfx.a
 
 RM = rm -f
-SRC = fdf.c			\
-	  fdf_data.c	\
-	  trace.c		\
-	  projection.c	\
-	  clean.c		\
+SRC = fdf.c				\
+	  fdf_data.c		\
+	  trace.c				\
+		projection.c	\
+		clean.c				\
 	  event.c
 OBJ = $(SRC:.c=.o)
 
@@ -44,7 +44,7 @@ $(LIBGFX):
 	make -sC $(LIBGFX_FOLDER)
 
 $(NAME): $(OBJ) $(LIBFT) $(LIBGFX)
-	@$(CC) -g3 $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(LIB2) $(LIBGFX) $(OBJ)
+	@$(CC) -fsanitize=address -g3 $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(LIB2) $(LIBGFX) $(OBJ)
 	@echo "/// all fdf ///"
 
 clean:

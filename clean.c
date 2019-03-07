@@ -25,13 +25,14 @@ void	clean_tab(t_point **coord, int coord_y)
 	free(coord);
 }
 
-void	clean_image(t_env *env)
+void	clean_image(t_env *env, t_img *img)
 {
-	mlx_destroy_image(env->mlx_ptr, env->img->ptr);
+	mlx_destroy_image(env->mlx_ptr, img->ptr);
+  ft_bzero(img, sizeof(t_img));
 }
 
 void	parciel_clean_env(t_env *env)
 {
 	clean_tab(env->tab_p, env->y_max);
-	clean_image(env);
+	clean_image(env, env->img);
 }
