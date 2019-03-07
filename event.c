@@ -58,30 +58,25 @@ int		event(int key, void *param)
 	}
 	ft_putnbr(key);
 	if (key == ZOOM)
-	{
 		env->scale += (float)0.5;
-		clear_img(env->img);
-	}
 	if (key == DZOOM)
-	{
 		env->scale -= (float)0.5;
-		clear_img(env->img);
-	}
+
 	if (key == UP)
-	{
 		env->c.y += (float)1;
-		clear_img(env->img);
-	}
 	if (key == DOWN)
 		env->c.y += (float)1;
 	if (key == RIGHT)
 		env->c.x += (float)1;
 	if (key == LEFT)
 		env->c.x -= (float)1;
+
 	if (key == MOREH)
 		env->c.z += (float)1;
 	if (key == LESSH)
 		env->c.z -= (float)1;
+
+	clear_img(env->img);
 	return (SUCCESS);
 }
 /*

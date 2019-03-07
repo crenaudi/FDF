@@ -104,7 +104,6 @@ int		trace(t_env *env, t_point **coord)
 					lerp_z(env, env->tab_p[y][x].z),
 					lerp_z(env, env->tab_p[y + 1][x].z));
 		}
-		mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img->ptr, 0, 0);
 	}
 	return (SUCCESS);
 }

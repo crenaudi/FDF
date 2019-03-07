@@ -12,12 +12,12 @@
 
 #include "includes/fdf.h"
 
-static void clean_tab(t_point **coord)
+static void clean_tab(t_point **coord, int coord_y)
 {
 	int i;
 
 	i = 0;
-	while (coord[i])
+	while (i < coord_y)
 	{
 		free(coord[i]);
 		i++;
@@ -53,6 +53,6 @@ int		converte(t_env *env)
 		}
 	}
 	trace(env, coord);
-	clean_tab(coord);
+	clean_tab(coord, env->y_max);
 	return (SUCCESS);
 }

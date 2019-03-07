@@ -78,6 +78,7 @@ static int 	make_tab(int y, t_env *env)
 int		stock_env(int fd, t_env *env)
 {
 	char	*line;
+	char	*line2;
 	t_p		*p;
 	int		x;
 	int		y;
@@ -87,6 +88,7 @@ int		stock_env(int fd, t_env *env)
 	env->p = p;
 	while (get_next_line(fd, &line) == 1)
 	{
+		line2 = line;
 		x = 0;
 		while (*line != '\0')
 		{
@@ -100,6 +102,7 @@ int		stock_env(int fd, t_env *env)
 		}
 		y++;
 	}
+	free(line2);
 	env->x_max = x;
 	env->y_max = y;
 	make_tab(-1, env);

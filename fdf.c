@@ -42,7 +42,7 @@ int	generate(t_env *env)
 {
 	converte(env);
 	env->bertrand += 0.05;
-	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img, 0, 0);
+	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img->ptr, 0, 0);
 	legend(env);
 	return (SUCCESS);
 }
