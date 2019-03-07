@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/09 14:29:04 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 16:36:14 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		event(int key, void *param)
 	env = (void*)param;
 	if (key == ESC)
 	{
-		mlx_destroy_image(env->mlx_ptr, env->img->ptr);
+		parciel_clean_env(env);
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
 		exit(0);
 	}

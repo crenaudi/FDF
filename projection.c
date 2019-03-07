@@ -6,24 +6,11 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:19:28 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/15 19:31:38 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/07 16:35:57 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-
-static void clean_tab(t_point **coord, int coord_y)
-{
-	int i;
-
-	i = 0;
-	while (i < coord_y)
-	{
-		free(coord[i]);
-		i++;
-	}
-	free(coord);
-}
 
 int		converte(t_env *env)
 {
