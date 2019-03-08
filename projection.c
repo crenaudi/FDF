@@ -39,6 +39,7 @@ int		converte(t_env *env)
 			rotate_z(&point[x], env->rot_map.z);
 		}
 	}
+	clean_image(env->img);
 	trace(env, coord);
 	clean_tab(coord, env->y_max);
 	return (SUCCESS);

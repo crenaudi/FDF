@@ -44,7 +44,7 @@ $(LIBGFX):
 	make -sC $(LIBGFX_FOLDER)
 
 $(NAME): $(OBJ) $(LIBFT) $(LIBGFX)
-	@$(CC) -fsanitize=address -g3 $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(LIB2) $(LIBGFX) $(OBJ)
+	@$(CC) $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(LIB2) $(LIBGFX) $(OBJ)
 	@echo "/// all fdf ///"
 
 clean:

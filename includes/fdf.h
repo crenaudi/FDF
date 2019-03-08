@@ -50,7 +50,7 @@ struct	s_env
 	struct s_p			*p;
 	float						scale;
 	struct s_color	color;
-	struct s_img		*img;
+	t_img						*img;
 	t_vec3					rot_map;
 	t_vec3					c;
 	int							y_max;
@@ -96,7 +96,8 @@ int			converte(t_env *env);
 int			affichage(t_env *env, t_point **coord);
 int			trace(t_env *env, t_point **coord);
 void		clean_tab(t_point **coord, int coord_y);
-void		clean_image(t_env *env, t_img *img);
+void		clean_image(t_img *img);
+void		kill_image(t_env *env, t_img *img);
 void		parciel_clean_env(t_env *env);
 
 #endif

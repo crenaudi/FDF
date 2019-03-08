@@ -59,8 +59,11 @@ int		main(int argc, char **argv)
 	if (fd < 0 || ft_strcmp(ft_strstr(argv[1], ".fdf"), ".fdf") != 0)
 		is_error(-1);
 
+	//ft_putstr("file ok ");
 	init_env(&env);
+	//ft_putstr("env init ");
 	stock_env(fd, &env);
+	//ft_putstr("stock ok");
 	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
 	mlx_key_hook(env.win_ptr, event, (void *)&env);
 	mlx_loop(env.mlx_ptr);

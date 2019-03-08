@@ -31,10 +31,10 @@ static void	init_trace(t_trace *b, t_point p1, t_point p2, float z1, float z2)
 	b->dir.y = abs(b->p2.y - b->p1.y);
 	b->sens.x = b->p1.x < b->p2.x ? 1 : -1;
 	b->sens.y = b->p1.y < b->p2.y ? 1 : -1;
-	b->c1 = z1 != 0.0 ? init_color(lerp_non_init_color(0x000000, 0x336699,
-		z1)) : init_color(0x000000);
-	b->c2 = z2 != 0.0 ? init_color(lerp_non_init_color(0x000000, 0x336699,
-		z2)) : init_color(0x000000);
+	b->c1 = z1 != 0.0 ? init_color(lerp_non_init_color(0x112233, 0x336699,
+		z1)) : init_color(0x112233);
+	b->c2 = z2 != 0.0 ? init_color(lerp_non_init_color(0x112233, 0x336699,
+		z2)) : init_color(0x112233);
 	b->t = vec2_dist(b->p2 - b->p1);
 }
 
@@ -54,8 +54,6 @@ static void	line(t_env *env, t_point p1, t_point p2, float z1, float z2)
 		t2 = vec2_dist(b.p2 - b.p1);
 		fill_pixel(env->img, b.p1.x + (W_WIDTH / 2), b.p1.y + (W_HEIGHT / 2),
 			lerp_color(b.c2, b.c1, fmod((t2 / b.t) + env->bertrand, 1.0)));
-		//mlx_pixel_put(env->mlx_ptr, env->win_ptr, b.p1.x, b.p1.y,
-			//lerp_color(b.c2, b.c1, fmod((t2 / b.t) + env->bertrand, 1.0)));
 		if (b.p1.x == b.p2.x && b.p1.y == b.p2.y)
 			return ;
 		e2 = err;

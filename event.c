@@ -52,21 +52,21 @@ int		event(int key, void *param)
 		ft_bzero(env, sizeof(t_env));
 		exit(0);
 	}
-	ft_putnbr(key);
+	//ft_putnbr(key);
 	if (key == ZOOM)
 		env->scale += (float)0.5;
 	if (key == DZOOM)
 		env->scale -= (float)0.5;
-	if (key == P)
+	if (key == O)
 	{
 		env->rot_map.x = deg2rad(-25);
 		env->rot_map.y = deg2rad(-25);
 		env->rot_map.z = deg2rad(25);
 	}
-	if (key == O)
+	if (key == P)
 	{
-		env->rot_map.x = deg2rad(25);
-		env->rot_map.y = deg2rad(0);
+		env->rot_map.x = deg2rad(0);
+		env->rot_map.y = deg2rad(-25);
 		env->rot_map.z = deg2rad(0);
 	}
 /*
@@ -83,7 +83,6 @@ int		event(int key, void *param)
 	if (key == LESSH)
 		env->c.z -= (float)1;
 */
-	ft_bzero(env->img->data, W_WIDTH * W_HEIGHT * (env->img->bpp / 4));
 	return (SUCCESS);
 }
 /*
