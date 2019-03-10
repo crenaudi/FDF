@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:12:16 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/10 17:42:06 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 18:35:04 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int			event(int key, void *param);
 void 		legend(t_env *env);
 void		is_error(int i);
 int			stock_env(int fd, t_env *env);
-int			generate(t_env *env);
+int			generate(void *param);
 int			converte(t_env *env);
 int			affichage(t_env *env, t_point **coord);
 int			trace(t_env *env, t_point **coord);

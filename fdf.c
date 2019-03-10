@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/10 17:50:31 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 18:29:00 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -24,6 +24,8 @@ static int init_env(t_env *env)
 	ft_putendl("init mlx");
 	read(0, &c, 1);
 	env->mlx_ptr = mlx_init();
+	ft_putendl("win");
+	read(0, &c, 1);
 	env->win_ptr = mlx_new_window(env->mlx_ptr, W_WIDTH, W_HEIGHT, "mlx_42");
 	ft_putendl("ptr img");
 	read(0, &c, 1);
@@ -48,8 +50,12 @@ static int init_env(t_env *env)
 	return (SUCCESS);
 }
 
-int	generate(t_env *env)
+int	generate(void *param)
 {
+	t_env	*env;
+
+	env = (void *)param;
+	fprintf(stderr, "converte\n");
 	converte(env);
 	env->bertrand += 0.05;
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img->ptr, 0, 0);

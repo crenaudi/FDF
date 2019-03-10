@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:32:17 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/11 19:38:47 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 18:11:03 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void fill_pixel(t_img *img, int x, int y, int color)
 	if (index < 0 || index >= W_HEIGHT * W_WIDTH)
 		return ;
 	img->data [index] = color;
+	printf("coucou\n");
 }
 
 static void	init_trace(t_trace *b, t_point p1, t_point p2, float z1, float z2)

@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:23:03 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/07 16:38:38 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 18:07:56 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	clean_tab(t_point **coord, int coord_y)
 
 void	clean_image(t_img *img)
 {
-	ft_bzero(img->data, W_WIDTH * W_HEIGHT * (img->bpp / 4));
+	ft_bzero(img->data, W_WIDTH * W_HEIGHT * (img->bpp / 8));
 }
 
 void	kill_image(t_env *env, t_img *img)
