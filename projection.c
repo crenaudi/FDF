@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:19:28 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/15 19:31:38 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 17:42:29 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ int		converte(t_env *env)
 {
 	int		x;
 	int		y;
+	char	c;
 
 	y = -1;
+	ft_putendl("converte");
+	read(0, &c, 1);
 	while (++y < env->y_max)
 	{
 		x = -1;

@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:12:16 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/15 19:23:50 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 17:42:06 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
-# include "libft.h"
-# include "gfx.h"
+# include "libft/libft.h"
+# include "libgfx/gfx.h"
 
 # define ERROR 				-1
 # define SUCCESS			0
