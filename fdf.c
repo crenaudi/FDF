@@ -53,7 +53,10 @@ int		main(int argc, char **argv)
 {
 	t_env		env;
 	int			fd;
+	char 		c;
 
+	ft_putendl("argc");
+	read(0, &c, 1);
 	if (argc != 2)
 	{
 		ft_putstr("Usage: ./env <filename>\n");
@@ -62,12 +65,16 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (fd < 0 || ft_strcmp(ft_strstr(argv[1], ".fdf"), ".fdf") != 0)
 		is_error(-1);
-
+	ft_putendl("init env");
+	read(0, &c, 1);
 	if (init_env(&env) == ERROR)
 		exit (0);
+	ft_putendl("reccup coord");
+	read(0, &c, 1);
 	stock_env(fd, &env);
-	if (env->stop == 0)
-		mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
+	ft_putendl("loop hook");
+	read(0, &c, 1);
+	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
 	mlx_key_hook(env.win_ptr, event, (void *)&env);
 	mlx_loop(env.mlx_ptr);
 	return (0);

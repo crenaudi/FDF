@@ -47,7 +47,7 @@ int		event(int key, void *param)
 	env = (void*)param;
 	if (key == ESC)
 	{
-		env->stop == 1;
+		env->stop = 1;
 		parciel_clean_env(env);
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
 		//ft_bzero(env, sizeof(t_env));
