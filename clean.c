@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:23:03 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/10 18:07:56 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 19:47:47 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	clean_tab(t_point **coord, int coord_y)
 		i++;
 	}
 	free(coord);
-	ft_putendl(" clean tab ");
 }
 
 void	clean_image(t_img *img)
@@ -35,7 +34,6 @@ void	kill_image(t_env *env, t_img *img)
 {
 	mlx_destroy_image(env->mlx_ptr, img->ptr);
 	free(img);
-	ft_putendl(" clean img ");
 }
 
 static void destroy_list(t_p *p)
@@ -49,7 +47,6 @@ static void destroy_list(t_p *p)
 		p = tmp;
 	}
 	free(tmp);
-	ft_putendl(" clean list ");
 }
 
 void	parciel_clean_env(t_env *env)

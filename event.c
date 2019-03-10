@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/09 14:29:04 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 19:48:18 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,10 @@ int		event(int key, void *param)
 	env = (void*)param;
 	if (key == ESC)
 	{
-		env->stop = 1;
 		parciel_clean_env(env);
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
-		//ft_bzero(env, sizeof(t_env));
 		exit(0);
 	}
-	//ft_putnbr(key);
 	if (key == ZOOM)
 		env->scale += (float)0.5;
 	if (key == DZOOM)

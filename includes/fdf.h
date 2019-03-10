@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:12:16 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/10 18:35:04 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/10 19:47:32 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ struct	s_env
 	float						z_min;
 	float						z_max;
 	float 					bertrand;
-	int							stop;
 };
 
 struct	s_p
