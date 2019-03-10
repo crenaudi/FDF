@@ -47,9 +47,10 @@ int		event(int key, void *param)
 	env = (void*)param;
 	if (key == ESC)
 	{
+		env->stop == 1;
 		parciel_clean_env(env);
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
-		ft_bzero(env, sizeof(t_env));
+		//ft_bzero(env, sizeof(t_env));
 		exit(0);
 	}
 	//ft_putnbr(key);
@@ -69,6 +70,7 @@ int		event(int key, void *param)
 		env->rot_map.y = deg2rad(-25);
 		env->rot_map.z = deg2rad(0);
 	}
+	generate(env);
 /*
 	if (key == UP)
 		env->c.y += (float)1;
@@ -85,16 +87,3 @@ int		event(int key, void *param)
 */
 	return (SUCCESS);
 }
-/*
-int		deal_mouse(int button, void *param)
-{
-//	if (button == R_MOUSSE)
-//		exit(0);
-//	if (button == L_MOUSSE)
-//		exit(0);
-	if (button == SCROLL_UP)
-		exit(0);
-	if (button == SCROLL_DOWN)
-		exit(0);
-	return (SUCCESS);
-}*/

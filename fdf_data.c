@@ -16,7 +16,7 @@ t_p		*add_point(int x, int y, int z)
 {
 	t_p	*p;
 
-	p = (t_p *)malloc(sizeof(t_p) * 1);
+	p = (t_p *)malloc(sizeof(t_p));
 	p->x = (float)x;
 	p->y = (float)y;
 	p->z = (float)z;
@@ -48,22 +48,23 @@ static void	coordonees(char **line, t_env *env, int x, int y)
 	}
 }
 
-static int 	make_tab(int y, t_env *env)
+static t_point 	**make_tab(int y, t_env *env)
 {
+	t_point **tab;
 	t_point *point;
 	t_p		*p;
 	int 	x;
 
 	y = env->y_max;
 	p = env->p;
-	if (!(env->tab_p = (t_point **)malloc(sizeof(t_point *) * env->y_max)))
-		return (ERROR);
+	if (!(tab = (t_point **)malloc(sizeof(t_point *) * env->y_max)))
+		return (NULL);
 	while (y--)
 	{
 		x = env->x_max;
 		if (!(point = (t_point *)malloc(sizeof(t_point) * env->x_max)))
-			return (ERROR);
-		env->tab_p[y] = point;
+			return (NULL);
+		tab[y] = point;
 		while (x--)
 		{
 			point[x].x = p->x;
@@ -72,7 +73,7 @@ static int 	make_tab(int y, t_env *env)
 			p = p->next;
 		}
 	}
-	return (SUCCESS);
+	return (tab);
 }
 
 int		stock_env(int fd, t_env *env)
@@ -100,11 +101,12 @@ int		stock_env(int fd, t_env *env)
 			line++;
 			x++;
 		}
+		free(line2);
 		y++;
 	}
-	free(line2);
 	env->x_max = x;
 	env->y_max = y;
-	make_tab(-1, env);
+	env->tab_p = make_tab(-1, env);
+	env->tab_m = make_tab(-1, env);
 	return (SUCCESS);
 }

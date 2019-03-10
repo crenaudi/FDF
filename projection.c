@@ -14,33 +14,25 @@
 
 int		converte(t_env *env)
 {
-	t_point	**coord;
-	t_point	*point;
 	int		x;
 	int		y;
 
 	y = -1;
-	if (!(coord = (t_point **)malloc(sizeof(t_point *) * env->y_max)))
-		return (ERROR);
 	while (++y < env->y_max)
 	{
-		if (!(point = (t_point *)malloc(sizeof(t_point) * env->x_max)))
-			return (ERROR);
-		coord[y] = point;
 		x = -1;
 		while (++x < env->x_max)
 		{
-			point[x].x = (env->tab_p[y][x].x - (env->x_max / 2));
-			point[x].y = (env->tab_p[y][x].y - (env->y_max / 2));
-			point[x].z = env->tab_p[y][x].z + env->c.z;
-			scale(&point[x], env->scale);
-			rotate_x(&point[x], env->rot_map.x);
-			rotate_y(&point[x], env->rot_map.y);
-			rotate_z(&point[x], env->rot_map.z);
+			env->tab_m[y][x].x = (env->tab_p[y][x].x - (env->x_max / 2));
+			env->tab_m[y][x].y = (env->tab_p[y][x].y - (env->y_max / 2));
+			env->tab_m[y][x].z = env->tab_p[y][x].z + env->c.z;
+			scale(&env->tab_m[y][x], env->scale);
+			rotate_x(&env->tab_m[y][x], env->rot_map.x);
+			rotate_y(&env->tab_m[y][x], env->rot_map.y);
+			rotate_z(&env->tab_m[y][x], env->rot_map.z);
 		}
 	}
 	clean_image(env->img);
-	trace(env, coord);
-	clean_tab(coord, env->y_max);
+	trace(env, env->tab_m);
 	return (SUCCESS);
 }

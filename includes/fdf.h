@@ -47,6 +47,7 @@ struct	s_env
 	void						*mlx_ptr;
 	void						*win_ptr;
 	t_point 				**tab_p;
+	t_point 				**tab_m;
 	struct s_p			*p;
 	float						scale;
 	struct s_color	color;
@@ -58,6 +59,7 @@ struct	s_env
 	float						z_min;
 	float						z_max;
 	float 					bertrand;
+	int							stop;
 };
 
 struct	s_p
@@ -92,6 +94,7 @@ int			event(int key, void *param);
 void 		legend(t_env *env);
 void		is_error(int i);
 int			stock_env(int fd, t_env *env);
+int			generate(t_env *env);
 int			converte(t_env *env);
 int			affichage(t_env *env, t_point **coord);
 int			trace(t_env *env, t_point **coord);

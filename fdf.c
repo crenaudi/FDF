@@ -12,18 +12,20 @@
 #include <stdio.h>
 #include "includes/fdf.h"
 
-static void init_env(t_env *env)
+static int init_env(t_env *env)
 {
-	static t_img img;
+	t_img *img;
 
+	if (!(img = (t_img *)malloc(sizeof(t_img))))
+		return (ERROR);
+	ft_bzero(img, sizeof(t_img));
 	ft_bzero(env, sizeof(t_env));
-	ft_bzero(&img, sizeof(t_img));
 	env->mlx_ptr = mlx_init();
 	env->win_ptr = mlx_new_window(env->mlx_ptr, W_WIDTH, W_HEIGHT, "mlx_42");
 	env->color = init_color(0x000000);
-	img.ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
-	img.data = (int *)(mlx_get_data_addr(img.ptr, &img.bpp, &img.sl, &img.endian));
-	env->img = &img;
+	img->ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
+	img->data = (int *)(mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->endian));
+	env->img = img;
 	env->rot_map.x = deg2rad(-25);
 	env->rot_map.y = deg2rad(-25);
 	env->rot_map.z = deg2rad(25);
@@ -34,6 +36,8 @@ static void init_env(t_env *env)
 	env->z_min = 0.0;
 	env->z_max = 0.0;
 	env->bertrand = 0;
+	env->stop = 0;
+	return (SUCCESS);
 }
 
 int	generate(t_env *env)
@@ -59,12 +63,11 @@ int		main(int argc, char **argv)
 	if (fd < 0 || ft_strcmp(ft_strstr(argv[1], ".fdf"), ".fdf") != 0)
 		is_error(-1);
 
-	//ft_putstr("file ok ");
-	init_env(&env);
-	//ft_putstr("env init ");
+	if (init_env(&env) == ERROR)
+		exit (0);
 	stock_env(fd, &env);
-	//ft_putstr("stock ok");
-	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
+	if (env->stop == 0)
+		mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
 	mlx_key_hook(env.win_ptr, event, (void *)&env);
 	mlx_loop(env.mlx_ptr);
 	return (0);

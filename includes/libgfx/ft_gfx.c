@@ -5,12 +5,7 @@ float vec2_dist(t_vec2 v2)
 {
      return (sqrt(v2.x * v2.x + v2.y * v2.y));
 }
-/*
-float interpolation(float t, float a, float b)
-{
-  return ((d1 - d2) / (b - a));
-}
-*/
+
 t_color init_color(int color)
 {
   t_color   c;
