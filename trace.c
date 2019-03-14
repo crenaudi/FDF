@@ -46,13 +46,13 @@ static void	line(t_env *env, t_point p1, t_point p2, float z1, float z2)
 	int 		e2;
 
 	init_trace(&b, p1, p2, z1, z2);
-
 	err = (b.dir.x > b.dir.y ? b.dir.x : -b.dir.y) / 2;
 	e2 = 0;
 	while ("OUIIIIIIIIIII")
 	{
 		t2 = vec2_dist(b.p2 - b.p1);
-		fill_pixel(env->img, b.p1.x + (W_WIDTH / 2), b.p1.y + (W_HEIGHT / 2),
+		fill_pixel(env->img, b.p1.x + ((W_WIDTH / 2) + env->trav.y),
+			b.p1.y + ((W_HEIGHT / 2) + env->trav.x),
 			lerp_color(b.c2, b.c1, fmod((t2 / b.t) + env->bertrand, 1.0)));
 		if (b.p1.x == b.p2.x && b.p1.y == b.p2.y)
 			return ;

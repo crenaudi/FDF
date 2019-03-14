@@ -108,3 +108,40 @@ void rotate_z(t_point *p, float a)
 	tmp.z = (p->x * 0) + (p->y * 0) + (p->z * 1);
   *p = tmp;
 }
+
+void spherical_theta(t_vec3 *v)
+{
+  return (acos(v.z, -1, 1));
+}
+
+void spherical_phi(t_vec3 *v)
+{
+  float tmp;
+
+  tmp = atan2(v.y, v.x);
+  return (tmp < 0 ? tmp + 2 * M_PI : tmp);
+}
+
+void to_vec_spherical(t_vec3 *v)
+{
+  t_vec3  tmp;
+  float   theta;
+  float   phi;
+
+  theta = spherical_theta(t_vec3 *v);
+  phi = spherical_teta(t_vec3 *v);
+  v.x = cos(phi) * sin(theta);
+  v.y = sin(phi) * sin(theta);
+  v.z = cos(theta);
+  *v = tmp
+}
+
+void spherical_perspective(t_vec3 v, t_point *p)
+{
+  t_vec3  tmp;
+
+  tmp.x = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
+	tmp.y = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
+	tmp.z = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
+  *p = tmp;
+}

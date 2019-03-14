@@ -14,19 +14,16 @@
 
 void legend(t_env *env)
 {
-	char *zoom;
-	char *sommet;
-	char *deplacement;
-	char *projection;
-
-	zoom = "ZOOM : 116 - 121";
-	sommet = "MODIF HAUTEUR : 115 -119";
-	deplacement = "DEPLACEMENT : fleche";
-	projection = "PROJECTION : P, O";
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 10, 0xFFFFFF, zoom);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 30, 0xFFFFFF, sommet);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 50, 0xFFFFFF, deplacement);
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 70, 0xFFFFFF, projection);
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 20, 0xFFFFFFF, "ZOOM :");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 40, 0x999999, "<- / ->");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 70, 0xFFFFFFF, "DISPLACEMENT :");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 90, 0x999999, "W / A / S / D");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 120, 0xFFFFFF, "ANGLE :");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 140, 0x999999, "(arrows)");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 170, 0xFFFFFF, "PROJECTION :");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 190, 0x999999, "P / O");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 220, 0xFFFFFF, "HIGH :");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 240, 0x999999, "|<- / ->|");
 }
 
 void	is_error(int i)
@@ -40,6 +37,30 @@ void	is_error(int i)
 		exit(EXIT_SUCCESS);
 }
 
+static void	move(int key, t_env *env)
+{
+	if (key == ZOOM)
+		env->scale += (float)0.5;
+	if (key == DZOOM)
+		env->scale -= (float)0.5;
+	if (key == UP)
+		env->rot_map.x += deg2rad(-1);
+	if (key == DOWN)
+		env->rot_map.x += deg2rad(1);
+	if (key == RIGHT)
+		env->rot_map.y += deg2rad(-1);
+	if (key == LEFT)
+		env->rot_map.y += deg2rad(1);
+	if (key == MOVE_U)
+		env->trav.x -= 1;
+	if (key == MOVE_D)
+		env->trav.x += 1;
+	if (key == MOVE_R)
+		env->trav.y += 1;
+	if (key == MOVE_L)
+		env->trav.y -= 1;
+}
+
 int		event(int key, void *param)
 {
 	t_env *env;
@@ -51,10 +72,8 @@ int		event(int key, void *param)
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
 		exit(0);
 	}
-	if (key == ZOOM)
-		env->scale += (float)0.5;
-	if (key == DZOOM)
-		env->scale -= (float)0.5;
+	//ft_putnbr(key);
+	//ft_putchar('\n');
 	if (key == O)
 	{
 		env->rot_map.x = deg2rad(-25);
@@ -67,20 +86,11 @@ int		event(int key, void *param)
 		env->rot_map.y = deg2rad(-25);
 		env->rot_map.z = deg2rad(0);
 	}
-	generate(env);
-/*
-	if (key == UP)
-		env->c.y += (float)1;
-	if (key == DOWN)
-		env->c.y += (float)1;
-	if (key == RIGHT)
-		env->c.x += (float)1;
-	if (key == LEFT)
-		env->c.x -= (float)1;
 	if (key == MOREH)
-		env->c.z += (float)1;
+		env->high += (float)0.5;
 	if (key == LESSH)
-		env->c.z -= (float)1;
-*/
+		env->high -= (float)0.5;
+	move(key, env);
+	generate(env);
 	return (SUCCESS);
 }

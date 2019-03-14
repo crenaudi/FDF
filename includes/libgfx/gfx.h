@@ -29,5 +29,9 @@ t_vec3  cross_product(t_vec3 a, t_vec3 b);
 void    rotate_x(t_point *p, float a);
 void    rotate_y(t_point *p, float a);
 void    rotate_z(t_point *p, float a);
+void    spherical_theta(t_vec3 *v);
+void    spherical_phi(t_vec3 *v);
+void    to_vec_spherical(t_vec3 *v);
+void    spherical_perspective(t_vec3 v, t_point *p);
 
 #endif

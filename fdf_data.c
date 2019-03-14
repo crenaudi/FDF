@@ -40,12 +40,8 @@ static void	coordonees(char **line, t_env *env, int x, int y)
 		p->next = env->p;
 		env->p = p;
 	}
-	z = abs(z);
-	while (z > 9)
-	{
-		z = z / 10;
+	while (**line != ' ' && **line != '\0')
 		(*line)++;
-	}
 }
 
 static t_point 	**make_tab(int y, t_env *env)
@@ -76,37 +72,39 @@ static t_point 	**make_tab(int y, t_env *env)
 	return (tab);
 }
 
-int		stock_env(int fd, t_env *env)
+static void complete_env(t_env *env, int x, int y)
 {
-	char	*line;
-	char	*line2;
-	t_p		*p;
-	int		x;
-	int		y;
-
-	y = 0;
-	p = NULL;
-	env->p = p;
-	while (get_next_line(fd, &line) == 1)
-	{
-		line2 = line;
-		x = 0;
-		while (*line != '\0')
-		{
-			while (*line == ' ')
-				line++;
-			if (*line == '\0')
-				break;
-			coordonees(&line, env, x, y);
-			line++;
-			x++;
-		}
-		free(line2);
-		y++;
-	}
 	env->x_max = x;
 	env->y_max = y;
 	env->tab_p = make_tab(-1, env);
 	env->tab_m = make_tab(-1, env);
+}
+
+int		stock_env(int fd, t_env *env)
+{
+	char	*line2;
+	t_p		*p;
+	t_vec2 index;
+
+	index.y = 0;
+	p = NULL;
+	env->p = p;
+	while (get_next_line(fd, &env->line) == 1)
+	{
+		line2 = env->line;
+		index.x = 0;
+		while (*env->line != '\0')
+		{
+			while (*env->line == ' ')
+				env->line++;
+			if (*env->line == '\0')
+				break;
+			coordonees(&env->line, env, index.x, index.y);
+			index.x++;
+		}
+		free(line2);
+		index.y++;
+	}
+	complete_env(env, index.x, index.y);
 	return (SUCCESS);
 }

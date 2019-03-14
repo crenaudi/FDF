@@ -22,7 +22,6 @@ static int init_env(t_env *env)
 	ft_bzero(env, sizeof(t_env));
 	env->mlx_ptr = mlx_init();
 	env->win_ptr = mlx_new_window(env->mlx_ptr, W_WIDTH, W_HEIGHT, "mlx_42");
-	env->color = init_color(0x000000);
 	img->ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
 	img->data = (int *)(mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->endian));
 	env->img = img;

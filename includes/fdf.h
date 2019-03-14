@@ -28,6 +28,10 @@
 # define P						35
 # define O						31
 # define ESC					53
+# define MOVE_U				13
+# define MOVE_D				1
+# define MOVE_R				2
+# define MOVE_L				0
 # define LEFT					123
 # define RIGHT				124
 # define UP						126
@@ -48,16 +52,17 @@ struct	s_env
 	void						*win_ptr;
 	t_point 				**tab_p;
 	t_point 				**tab_m;
+	char						*line;
 	struct s_p			*p;
-	float						scale;
-	struct s_color	color;
 	t_img						*img;
 	t_vec3					rot_map;
-	t_vec3					c;
+	t_vec2					trav;
 	int							y_max;
 	int							x_max;
 	float						z_min;
 	float						z_max;
+	float						scale;
+	float						high;
 	float 					bertrand;
 };
 
