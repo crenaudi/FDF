@@ -39,9 +39,12 @@ int		converte(t_env *env)
 			scale(&env->tab_m[y][x], env->scale);
 			if (env->is_spherical == 1)
 				make_spherical(&env->tab_p[y][x]);
-			rotate_x(&env->tab_m[y][x], env->rot_map.x);
-			rotate_y(&env->tab_m[y][x], env->rot_map.y);
-			rotate_z(&env->tab_m[y][x], env->rot_map.z);
+			else
+			{
+				rotate_x(&env->tab_m[y][x], env->rot_map.x);
+				rotate_y(&env->tab_m[y][x], env->rot_map.y);
+				rotate_z(&env->tab_m[y][x], env->rot_map.z);
+			}
 		}
 	}
 	clean_image(env->img);
