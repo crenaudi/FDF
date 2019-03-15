@@ -27,6 +27,7 @@
 # define W_HEIGHT			600
 # define P						35
 # define O						31
+# define I						34
 # define ESC					53
 # define MOVE_U				13
 # define MOVE_D				1
@@ -62,7 +63,7 @@ struct	s_env
 	float						z_min;
 	float						z_max;
 	float						scale;
-	float						high;
+	int							is_spherical;
 	float 					bertrand;
 };
 

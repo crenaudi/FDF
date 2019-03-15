@@ -62,16 +62,16 @@ void scale(t_point *p, float e)
 	p->z = p->z * e;
 }
 
-float dot_product(t_vec3 a, t_vec3 b)
+float dot_product(t_point a, t_point b)
 {
   float angle;
   angle = (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
   return (angle);
 }
 
-t_vec3 cross_product(t_vec3 a, t_vec3 b)
+t_vec3 cross_product(t_point a, t_point b)
 {
-  t_vec3  c;
+  t_point  c;
 
   c.x = (a.y * b.z) - (a.z * b.y);
 	c.y = (a.z * b.x) - (a.x * b.z);
@@ -109,12 +109,26 @@ void rotate_z(t_point *p, float a)
   *p = tmp;
 }
 
-void spherical_theta(t_vec3 *v)
+t_point normalize(t_point v)
 {
-  return (acos(v.z, -1, 1));
+  float invlen;
+
+  if ((v.x + v.y + v.z) != 0)
+  {
+    invlen = 1 / sqrtf((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
+    v.x *= invlen;
+    v.y *= invlen;
+    v.z *= invlen;
+  }
+  return (v);
 }
 
-void spherical_phi(t_vec3 *v)
+float spherical_theta(t_point v)
+{
+  return (acos(v.z));
+}
+
+float spherical_phi(t_point v)
 {
   float tmp;
 
@@ -122,26 +136,50 @@ void spherical_phi(t_vec3 *v)
   return (tmp < 0 ? tmp + 2 * M_PI : tmp);
 }
 
-void to_vec_spherical(t_vec3 *v)
+t_point to_vec_spherical(t_point v)
 {
-  t_vec3  tmp;
   float   theta;
   float   phi;
 
-  theta = spherical_theta(t_vec3 *v);
-  phi = spherical_teta(t_vec3 *v);
+  theta = spherical_theta(v);
+  phi = spherical_phi(v);
   v.x = cos(phi) * sin(theta);
   v.y = sin(phi) * sin(theta);
   v.z = cos(theta);
-  *v = tmp
+  return (v);
 }
 
-void spherical_perspective(t_vec3 v, t_point *p)
+void spherical_perspective(t_point v, t_point *p)
 {
-  t_vec3  tmp;
+  t_point  tmp;
 
   tmp.x = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
 	tmp.y = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
 	tmp.z = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
   *p = tmp;
 }
+/*
+void sph_point(float lat, float lon, t_point *p)
+{
+  t_point   tmp;
+
+  tmp.x = p * cos(lat) * cos(lon);
+  tmp.y = p * cos(lat) * sin(lon);
+  tmp.z = p * sin(lat);
+  *p = tmp;
+}
+
+void spherical_perspective(t_point u, t_point v, t_point *p)
+{
+  float     angle_u;
+  float     angle_v;
+  float     lat;
+  float     lon;
+
+  angle_u = dot_product(p, u);
+  angle_v = dot_product(p, v);
+  lon = 6.2831853 * angle_u / u_size_of_mesh;
+  lat = 3.1415926 * angle_v / v_size_of_mesh;
+  sph_point(lat, lon, p);
+}
+*/

@@ -21,9 +21,9 @@ void legend(t_env *env)
 	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 120, 0xFFFFFF, "ANGLE :");
 	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 140, 0x999999, "(arrows)");
 	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 170, 0xFFFFFF, "PROJECTION :");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 190, 0x999999, "P / O");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 220, 0xFFFFFF, "HIGH :");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 240, 0x999999, "|<- / ->|");
+	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 190, 0x999999, "I / O / P");
+	//mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 220, 0xFFFFFF, "HIGH :");
+	//mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 240, 0x999999, "|<- / ->|");
 }
 
 void	is_error(int i)
@@ -76,20 +76,28 @@ int		event(int key, void *param)
 	//ft_putchar('\n');
 	if (key == O)
 	{
+		env->is_spherical = 0;
 		env->rot_map.x = deg2rad(-25);
 		env->rot_map.y = deg2rad(-25);
 		env->rot_map.z = deg2rad(25);
 	}
 	if (key == P)
 	{
+		env->is_spherical = 0;
 		env->rot_map.x = deg2rad(0);
 		env->rot_map.y = deg2rad(-25);
 		env->rot_map.z = deg2rad(0);
 	}
+	if (key == I)
+	{
+		env->is_spherical = 1;
+	}
+	/*
 	if (key == MOREH)
 		env->high += (float)0.5;
 	if (key == LESSH)
 		env->high -= (float)0.5;
+		*/
 	move(key, env);
 	generate(env);
 	return (SUCCESS);

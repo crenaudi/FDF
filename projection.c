@@ -12,10 +12,20 @@
 
 #include "includes/fdf.h"
 
+static void 	make_spherical(t_point *p)
+{
+	t_point v;
+	t_point tmp;
+
+	tmp = *p;
+	v = to_vec_spherical(normalize(tmp));
+	spherical_perspective(v, p);
+}
+
 int		converte(t_env *env)
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 
 	y = -1;
 	while (++y < env->y_max)
@@ -27,6 +37,8 @@ int		converte(t_env *env)
 			env->tab_m[y][x].y = env->tab_p[y][x].y - (env->y_max / 2);
 			env->tab_m[y][x].z = env->tab_p[y][x].z - (env->z_max / 2);
 			scale(&env->tab_m[y][x], env->scale);
+			if (env->is_spherical == 1)
+				make_spherical(&env->tab_p[y][x]);
 			rotate_x(&env->tab_m[y][x], env->rot_map.x);
 			rotate_y(&env->tab_m[y][x], env->rot_map.y);
 			rotate_z(&env->tab_m[y][x], env->rot_map.z);
