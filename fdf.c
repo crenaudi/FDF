@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "includes/fdf.h"
 
-static int init_env(t_env *env)
+static int init_env(t_env *env, float scale)
 {
 	t_img *img;
 
@@ -25,10 +25,10 @@ static int init_env(t_env *env)
 	img->ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
 	img->data = (int *)(mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->endian));
 	env->img = img;
-	env->rot_map.x = deg2rad(-25);
-	env->rot_map.y = deg2rad(-25);
-	env->rot_map.z = deg2rad(25);
-	env->scale = (float)20.0;
+	env->rot_map.x = deg2rad(-50);
+	env->rot_map.y = deg2rad(-50);
+	env->rot_map.z = deg2rad(30);
+	env->scale = scale;
 	return (SUCCESS);
 }
 
@@ -48,6 +48,7 @@ int		main(int argc, char **argv)
 {
 	t_env		env;
 	int			fd;
+	float		scale;
 
 	if (argc != 2)
 	{
@@ -57,7 +58,8 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (fd < 0 || ft_strcmp(ft_strstr(argv[1], ".fdf"), ".fdf") != 0)
 		is_error(-1);
-	if (init_env(&env) == ERROR)
+	scale = ft_strstr(argv[1], "mars") != 0 ? (float)4.5 : (float)16.0;
+	if (init_env(&env, scale) == ERROR)
 		exit (0);
 	stock_env(fd, &env);
 	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);

@@ -77,15 +77,15 @@ int		event(int key, void *param)
 	if (key == O)
 	{
 		env->is_spherical = 0;
-		env->rot_map.x = deg2rad(-25);
-		env->rot_map.y = deg2rad(-25);
-		env->rot_map.z = deg2rad(25);
+		env->rot_map.x = deg2rad(-50);
+		env->rot_map.y = deg2rad(-50);
+		env->rot_map.z = deg2rad(30);
 	}
 	if (key == P)
 	{
 		env->is_spherical = 0;
-		env->rot_map.x = deg2rad(0);
-		env->rot_map.y = deg2rad(-25);
+		env->rot_map.x = deg2rad(-25);
+		env->rot_map.y = deg2rad(0);
 		env->rot_map.z = deg2rad(0);
 	}
 	if (key == I)

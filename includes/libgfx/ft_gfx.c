@@ -140,24 +140,23 @@ t_point to_vec_spherical(t_point v)
 {
   float   theta;
   float   phi;
+  t_point tmp;
 
   theta = spherical_theta(v);
   phi = spherical_phi(v);
-  v.x = cos(phi) * sin(theta);
-  v.y = sin(phi) * sin(theta);
-  v.z = cos(theta);
-  return (v);
+  tmp.x = cos(phi) * sin(theta);
+  tmp.y = sin(phi) * sin(theta);
+  tmp.z = cos(theta);
+  return (tmp);
 }
 
 void spherical_perspective(t_point v, t_point *p)
 {
   t_point  tmp;
-  t_point  n;
 
-  n = normalize(*p);
-  tmp.x = (v.x * tanf(p->x)) + (v.y * tanf(p->y)) + (v.z * tanf(p->z));
-	tmp.y = (v.x * atanf(p->x)) + (v.y * atanf(p->y)) + (v.z * atanf(p->z));
-	tmp.z = (v.x * n.x) + (v.y * n.y) + (v.z * n.z);
+  tmp.x = (v.x * p->x) + (v.x * p->y) + (v.x * p->z);
+	tmp.y = (v.y * p->x) + (v.y * p->y) + (v.y * p->z);
+	tmp.z = (v.z * p->x) + (v.z * p->y) + (v.z * p->z);
   *p = tmp;
 }
 /*

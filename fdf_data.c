@@ -60,14 +60,19 @@ static t_point 	**make_tab(int y, t_env *env)
 		x = env->x_max;
 		if (!(point = (t_point *)malloc(sizeof(t_point) * env->x_max)))
 			return (NULL);
+
 		tab[y] = point;
 		while (x--)
 		{
 			point[x].x = p->x;
 			point[x].y = p->y;
 			point[x].z = p->z;
+			//ft_putnbr(p->z);
+			//ft_putchar(' ');
 			p = p->next;
 		}
+		//ft_putnbr(y);
+		//ft_putchar('\n');
 	}
 	return (tab);
 }
