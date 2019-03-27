@@ -64,6 +64,7 @@ int		main(int argc, char **argv)
 	stock_env(fd, &env);
 	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
 	mlx_key_hook(env.win_ptr, event, (void *)&env);
+	mlx_hook(env.win_ptr, x_event, 0, int (*funct)(), void *param);
 	mlx_loop(env.mlx_ptr);
 	return (0);
 }

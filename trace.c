@@ -72,6 +72,10 @@ static void	line(t_env *env, t_point p1, t_point p2, float z1, float z2)
 
 static float	lerp_z(t_env *env, float z)
 {
+	if (env->z_max == 0)
+		env->z_max = 2;
+	if (env->z_min == 0)
+		env->z_min = 1;
 	return ((z - env->z_min) / (env->z_max - env->z_min));
 }
 

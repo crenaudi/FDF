@@ -30,12 +30,13 @@ void    rotate_x(t_point *p, float a);
 void    rotate_y(t_point *p, float a);
 void    rotate_z(t_point *p, float a);
 t_point normalize(t_point v);
+
 float   spherical_theta(t_point v);
 float   spherical_phi(t_point v);
 t_point to_vec_spherical(t_point v);
 void    spherical_perspective(t_point v, t_point *p);
-/*
-void    sph_point(float lat, float lg, t_point *p);
-void    spherical_perspective(t_point u, t_point v, t_point *p);
-*/
+
+//void    sph_point(float lat, float lg, t_point *p);
+//void    sph_perspective(t_point u, t_point v, t_point *p, float x, float y);
+
 #endif

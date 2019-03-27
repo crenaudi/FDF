@@ -144,9 +144,9 @@ t_point to_vec_spherical(t_point v)
 
   theta = spherical_theta(v);
   phi = spherical_phi(v);
-  tmp.x = cos(phi) * sin(theta);
-  tmp.y = sin(phi) * sin(theta);
-  tmp.z = cos(theta);
+  tmp.x = cos(phi) * cos(theta);
+  tmp.y = cos(phi) * sin(theta);
+  tmp.z = sin(phi);
   return (tmp);
 }
 
@@ -154,33 +154,35 @@ void spherical_perspective(t_point v, t_point *p)
 {
   t_point  tmp;
 
-  tmp.x = (v.x * p->x) + (v.x * p->y) + (v.x * p->z);
-	tmp.y = (v.y * p->x) + (v.y * p->y) + (v.y * p->z);
-	tmp.z = (v.z * p->x) + (v.z * p->y) + (v.z * p->z);
+  tmp.x = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
+	tmp.y = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
+	tmp.z = (v.x * p->x) + (v.y * p->y) + (v.z * p->z);
   *p = tmp;
 }
 /*
 void sph_point(float lat, float lon, t_point *p)
 {
   t_point   tmp;
+  float     r;
 
-  tmp.x = p * cos(lat) * cos(lon);
-  tmp.y = p * cos(lat) * sin(lon);
-  tmp.z = p * sin(lat);
+  r = dot_product(*p, *p);
+  tmp.x = r * cos(lat) * cos(lon);
+  tmp.y = r * cos(lat) * sin(lon);
+  tmp.z = r * sin(lat);
   *p = tmp;
 }
 
-void spherical_perspective(t_point u, t_point v, t_point *p)
+void sph_perspective(t_point u, t_point v, t_point *p, float x, float y)
 {
   float     angle_u;
   float     angle_v;
   float     lat;
   float     lon;
 
-  angle_u = dot_product(p, u);
-  angle_v = dot_product(p, v);
-  lon = 6.2831853 * angle_u / u_size_of_mesh;
-  lat = 3.1415926 * angle_v / v_size_of_mesh;
+  angle_u = dot_product(*p, u);
+  angle_v = dot_product(*p, v);
+  lon = 6.2831853 * angle_u / y;
+  lat = 3.1415926 * angle_v / x;
   sph_point(lat, lon, p);
 }
 */

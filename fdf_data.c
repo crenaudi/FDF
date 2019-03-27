@@ -67,7 +67,7 @@ static t_point 	**make_tab(int y, t_env *env)
 			point[x].x = p->x;
 			point[x].y = p->y;
 			point[x].z = p->z;
-			//ft_putnbr(p->z);
+			//ft_putnbr(p->x);
 			//ft_putchar(' ');
 			p = p->next;
 		}
