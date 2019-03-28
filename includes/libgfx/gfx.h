@@ -18,8 +18,8 @@ struct  s_color
 };
 
 float   vec2_dist(t_vec2 v2);
-t_color init_color(int color);
-int     lerp_color(t_color s, t_color e, float t);
+t_color init_c(int color);
+int     lerp_c(t_color s, t_color e, float t);
 int     lerp_non_init_color(int a, int b, float t);
 float   deg2rad(float d);
 float   rad2deg(float r);
@@ -30,13 +30,9 @@ void    rotate_x(t_point *p, float a);
 void    rotate_y(t_point *p, float a);
 void    rotate_z(t_point *p, float a);
 t_point normalize(t_point v);
-
 float   spherical_theta(t_point v);
 float   spherical_phi(t_point v);
 t_point to_vec_spherical(t_point v);
 void    spherical_perspective(t_point v, t_point *p);
-
-//void    sph_point(float lat, float lg, t_point *p);
-//void    sph_perspective(t_point u, t_point v, t_point *p, float x, float y);
 
 #endif

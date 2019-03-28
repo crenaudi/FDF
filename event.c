@@ -24,17 +24,6 @@ void legend(t_env *env)
 	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 190, 0x999999, "O / P");
 }
 
-void	is_error(int i)
-{
-	if (i == -1)
-	{
-		perror("Error ");
-		exit(EXIT_FAILURE);
-	}
-	if (i == 0)
-		exit(EXIT_SUCCESS);
-}
-
 int		event(int key, t_env *env)
 {
 	if (key == ESC)

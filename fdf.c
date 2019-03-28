@@ -21,14 +21,14 @@ static int init_env(t_env *env, float scale)
 	ft_bzero(img, sizeof(t_img));
 	ft_bzero(env, sizeof(t_env));
 	env->mlx_ptr = mlx_init();
-	env->win_ptr = mlx_new_window(env->mlx_ptr, W_WIDTH, W_HEIGHT, "mlx_42");
-	img->ptr = mlx_new_image(env->mlx_ptr, W_WIDTH, W_HEIGHT);
+	env->win_ptr = mlx_new_window(env->mlx_ptr, WIN_W, WIN_H, "mlx_42");
+	img->ptr = mlx_new_image(env->mlx_ptr, WIN_W, WIN_H);
 	img->data = (int *)(mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->endian));
 	env->img = img;
 	env->rot_map.x = deg2rad(-50);
 	env->rot_map.y = deg2rad(-50);
 	env->rot_map.z = deg2rad(30);
-	env->scale = scale;
+	env->scl = scale;
 	return (SUCCESS);
 }
 
@@ -55,7 +55,7 @@ static void	is_move(t_env *env)
 		view.y += deg2rad(-1);
 	if (env->v_left != 0)
 		view.y += deg2rad(1);
-	env->trav += dir;
+	env->tr += dir;
 	env->rot_map.x += view.x;
 	env->rot_map.y += view.y;
 }
@@ -71,10 +71,10 @@ int	generate(void *param)
 		zoom += 0.5f;
 	if (env->back != 0)
 		zoom -= 0.5f;
-	env->scale += zoom;
+	env->scl += zoom;
 	is_move(env);
 	converte(env);
-	env->bertrand += 0.05;
+	env->bert += 0.05;
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img->ptr, 0, 0);
 	legend(env);
 	return (SUCCESS);

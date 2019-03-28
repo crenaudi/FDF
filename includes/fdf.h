@@ -24,8 +24,8 @@
 
 # define ERROR 				-1
 # define SUCCESS			0
-# define W_WIDTH			1200
-# define W_HEIGHT			600
+# define WIN_W				1200
+# define WIN_H				600
 # define P						35
 # define O						31
 # define ESC					53
@@ -55,13 +55,13 @@ struct	s_env
 	struct s_p			*p;
 	t_img						*img;
 	t_vec3					rot_map;
-	t_vec2					trav;
+	t_vec2					tr;
 	int							y_max;
 	int							x_max;
 	float						z_min;
 	float						z_max;
-	float						scale;
-	float 					bertrand;
+	float						scl;
+	float 					bert;
 	int							up;
 	int							down;
 	int							right;
@@ -108,8 +108,8 @@ void		is_error(int i);
 int			stock_env(int fd, t_env *env);
 int			generate(void *param);
 int			converte(t_env *env);
+void		line(t_env *env, t_point p1, t_point p2, t_vec3 z);
 int			affichage(t_env *env, t_point **coord);
-int			trace(t_env *env, t_point **coord);
 void		clean_tab(t_point **coord, int coord_y);
 void		clean_image(t_img *img);
 void		kill_image(t_env *env, t_img *img);

@@ -12,6 +12,17 @@
 
 #include "includes/fdf.h"
 
+void	is_error(int i)
+{
+	if (i == -1)
+	{
+		perror("Error ");
+		exit(EXIT_FAILURE);
+	}
+	if (i == 0)
+		exit(EXIT_SUCCESS);
+}
+
 void	clean_tab(t_point **coord, int coord_y)
 {
 	int i;
@@ -27,7 +38,7 @@ void	clean_tab(t_point **coord, int coord_y)
 
 void	clean_image(t_img *img)
 {
-	ft_bzero(img->data, W_WIDTH * W_HEIGHT * (img->bpp / 8));
+	ft_bzero(img->data, WIN_W * WIN_H * (img->bpp / 8));
 }
 
 void	kill_image(t_env *env, t_img *img)

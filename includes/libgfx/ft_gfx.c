@@ -6,7 +6,7 @@ float vec2_dist(t_vec2 v2)
      return (sqrt(v2.x * v2.x + v2.y * v2.y));
 }
 
-t_color init_color(int color)
+t_color init_c(int color)
 {
   t_color   c;
   int       mask;
@@ -20,7 +20,7 @@ t_color init_color(int color)
   return (c);
 }
 
-int lerp_color(t_color s, t_color e, float t)
+int lerp_c(t_color s, t_color e, float t)
 {
   int   r;
   int   g;
@@ -36,7 +36,7 @@ int lerp_color(t_color s, t_color e, float t)
 
 int lerp_non_init_color(int a, int b, float t)
 {
-  return (lerp_color(init_color(a), init_color(b), t));
+  return (lerp_c(init_c(a), init_c(b), t));
 }
 
 float deg2rad(float d)
