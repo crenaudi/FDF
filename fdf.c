@@ -32,17 +32,54 @@ static int init_env(t_env *env, float scale)
 	return (SUCCESS);
 }
 
+static void	is_move(t_env *env)
+{
+	t_vec2	dir;
+	t_vec3	view;
+
+	dir = 0;
+	view = 0;
+	if (env->up != 0)
+		dir.x -= 1;
+	if (env->down != 0)
+		dir.x += 1;
+	if (env->left != 0)
+		dir.y -= 1;
+	if (env->right != 0)
+		dir.y += 1;
+	if (env->v_up != 0)
+		view.x += deg2rad(-1);
+	if (env->v_down != 0)
+		view.x += deg2rad(1);
+	if (env->v_right != 0)
+		view.y += deg2rad(-1);
+	if (env->v_left != 0)
+		view.y += deg2rad(1);
+	env->trav += dir;
+	env->rot_map.x += view.x;
+	env->rot_map.y += view.y;
+}
+
 int	generate(void *param)
 {
-	t_env	*env;
+	t_env		*env;
+	float	zoom;
 
-	env = (void *)param;
+	env = (t_env *)param;
+	zoom = 0;
+	if (env->front != 0)
+		zoom += 0.5f;
+	if (env->back != 0)
+		zoom -= 0.5f;
+	env->scale += zoom;
+	is_move(env);
 	converte(env);
 	env->bertrand += 0.05;
 	mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img->ptr, 0, 0);
 	legend(env);
 	return (SUCCESS);
 }
+
 
 int		main(int argc, char **argv)
 {
@@ -58,13 +95,14 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (fd < 0 || ft_strcmp(ft_strstr(argv[1], ".fdf"), ".fdf") != 0)
 		is_error(-1);
-	scale = ft_strstr(argv[1], "mars") != 0 ? (float)4.5 : (float)16.0;
+	scale = ft_strstr(argv[1], "mars") != 0 ? 4.5f : 16.0f;
 	if (init_env(&env, scale) == ERROR)
 		exit (0);
 	stock_env(fd, &env);
 	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
-	mlx_key_hook(env.win_ptr, event, (void *)&env);
-	mlx_hook(env.win_ptr, x_event, 0, int (*funct)(), void *param);
+	mlx_hook(env.win_ptr, 2, 0, key_press_event, (void *)&env);
+	mlx_hook(env.win_ptr, 3, 0, key_release_event, (void *)&env);
+	mlx_hook(env.win_ptr, 12, 0, win_event, (void *)&env);
 	mlx_loop(env.mlx_ptr);
 	return (0);
 }

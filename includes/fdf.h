@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
+
 # include "libft/libft.h"
 # include "libgfx/gfx.h"
 
@@ -27,7 +28,6 @@
 # define W_HEIGHT			600
 # define P						35
 # define O						31
-# define I						34
 # define ESC					53
 # define MOVE_U				13
 # define MOVE_D				1
@@ -39,8 +39,6 @@
 # define DOWN					125
 # define ZOOM					116
 # define DZOOM				121
-# define MOREH				115
-# define LESSH				119
 
 typedef struct	s_env			t_env;
 typedef struct	s_p				t_p;
@@ -63,8 +61,17 @@ struct	s_env
 	float						z_min;
 	float						z_max;
 	float						scale;
-	int							is_spherical;
 	float 					bertrand;
+	int							up;
+	int							down;
+	int							right;
+	int							left;
+	int							front;
+	int							back;
+	int							v_up;
+	int							v_down;
+	int							v_right;
+	int							v_left;
 };
 
 struct	s_p
@@ -95,7 +102,7 @@ struct s_img
 	int		endian;
 };
 
-int			event(int key, void *param);
+int			event(int key, t_env *env);
 void 		legend(t_env *env);
 void		is_error(int i);
 int			stock_env(int fd, t_env *env);
@@ -107,5 +114,8 @@ void		clean_tab(t_point **coord, int coord_y);
 void		clean_image(t_img *img);
 void		kill_image(t_env *env, t_img *img);
 void		parciel_clean_env(t_env *env);
+int			key_press_event(int key, void *param);
+int			key_release_event(int key, void *param);
+int			win_event(void *param);
 
 #endif
