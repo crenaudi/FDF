@@ -12,18 +12,6 @@
 
 #include "includes/fdf.h"
 
-void legend(t_env *env)
-{
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 20, 0xFFFFFFF, "ZOOM :");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 40, 0x999999, "<- / ->");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 70, 0xFFFFFFF, "DISPLACEMENT :");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 90, 0x999999, "W / A / S / D");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 120, 0xFFFFFF, "ANGLE :");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 140, 0x999999, "(arrows)");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 10, 170, 0xFFFFFF, "PROJECTION :");
-	mlx_string_put(env->mlx_ptr, env->win_ptr, 20, 190, 0x999999, "O / P");
-}
-
 int		event(int key, t_env *env)
 {
 	if (key == ESC)

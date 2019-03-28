@@ -30,6 +30,7 @@ SRC = fdf.c				\
 	  trace.c				\
 		projection.c	\
 		clean.c				\
+		legend.c			\
 	  event.c
 OBJ = $(SRC:.c=.o)
 

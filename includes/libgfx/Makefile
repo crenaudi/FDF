@@ -16,7 +16,13 @@ CC = gcc
 RL = ranlib
 RM = rm -f
 CFLAGS = -Wall -Werror -Wextra -c
-SRC = ft_gfx.c
+SRC = ft_gfx.c		\
+	  lerp.c				\
+	  raddeg.c			\
+		normalize.c		\
+		product.c			\
+		rotation.c		\
+	  scale.c
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all clean fclean re

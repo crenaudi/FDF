@@ -1,6 +1,7 @@
 #ifndef		GFX_H
 # define	GFX_H
 
+# include <stdio.h>
 # include <math.h>
 # include "../libft/libft.h"
 

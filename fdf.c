@@ -95,7 +95,7 @@ int		main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (fd < 0 || ft_strcmp(ft_strstr(argv[1], ".fdf"), ".fdf") != 0)
 		is_error(-1);
-	scale = ft_strstr(argv[1], "mars") != 0 ? 4.5f : 16.0f;
+	scale = ft_strstr(argv[1], "mars") != 0 ? 5.0f : 20.0f;
 	if (init_env(&env, scale) == ERROR)
 		exit (0);
 	stock_env(fd, &env);
