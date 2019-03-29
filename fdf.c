@@ -6,15 +6,15 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/10 19:47:14 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/29 16:03:47 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 #include "includes/fdf.h"
 
-static int init_env(t_env *env, float scale)
+static int	init_env(t_env *env, float scale)
 {
-	t_img *img;
+	t_img	*img;
 
 	if (!(img = (t_img *)malloc(sizeof(t_img))))
 		return (ERROR);
@@ -23,7 +23,8 @@ static int init_env(t_env *env, float scale)
 	env->mlx_ptr = mlx_init();
 	env->win_ptr = mlx_new_window(env->mlx_ptr, WIN_W, WIN_H, "mlx_42");
 	img->ptr = mlx_new_image(env->mlx_ptr, WIN_W, WIN_H);
-	img->data = (int *)(mlx_get_data_addr(img->ptr, &img->bpp, &img->sl, &img->endian));
+	img->data = (int *)(mlx_get_data_addr(img->ptr, &img->bpp, &img->sl,
+				&img->endian));
 	env->img = img;
 	env->rot_map.x = deg2rad(-50);
 	env->rot_map.y = deg2rad(-50);
@@ -60,9 +61,9 @@ static void	is_move(t_env *env)
 	env->rot_map.y += view.y;
 }
 
-int	generate(void *param)
+int			generate(void *param)
 {
-	t_env		*env;
+	t_env	*env;
 	float	zoom;
 
 	env = (t_env *)param;
@@ -80,12 +81,11 @@ int	generate(void *param)
 	return (SUCCESS);
 }
 
-
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	t_env		env;
-	int			fd;
-	float		scale;
+	t_env	env;
+	int		fd;
+	float	scale;
 
 	if (argc != 2)
 	{
@@ -94,12 +94,13 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY | O_NOFOLLOW);
 	if (fd < 0 || ft_strcmp(ft_strstr(argv[1], ".fdf"), ".fdf") != 0)
-		is_error(-1);
+		is_error(1);
 	scale = ft_strstr(argv[1], "mars") != 0 ? 5.0f : 20.0f;
 	if (init_env(&env, scale) == ERROR)
-		exit (0);
-	stock_env(fd, &env);
-	mlx_loop_hook (env.mlx_ptr, generate, (void *)&env);
+		exit(0);
+	if (stock_env(fd, &env) == ERROR)
+		is_error(3);
+	mlx_loop_hook(env.mlx_ptr, generate, (void *)&env);
 	mlx_hook(env.win_ptr, 2, 0, key_press_event, (void *)&env);
 	mlx_hook(env.win_ptr, 3, 0, key_release_event, (void *)&env);
 	mlx_hook(env.win_ptr, 12, 0, win_event, (void *)&env);

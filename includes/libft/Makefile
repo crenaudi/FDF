@@ -6,7 +6,7 @@
 #    By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:13:30 by crenaudi          #+#    #+#              #
-#    Updated: 2019/03/10 18:04:16 by crenaudi         ###   ########.fr        #
+#    Updated: 2019/03/29 15:38:24 by crenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -fsanitize=address -g3 $(SRC) -I .
+	@$(CC) $(CFLAGS) -g3 $(SRC) -I .
 	@$(AR) $(NAME) $(OBJ)
 	@$(RL) $(NAME)
 	@echo "/// all lib ok ///"

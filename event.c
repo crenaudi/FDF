@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:36:07 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/10 19:48:18 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/29 14:47:23 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		event(int key, t_env *env)
 	return (SUCCESS);
 }
 
-int	key_press_event(int key, void *param)
+int		key_press_event(int key, void *param)
 {
 	t_env	*env;
 
@@ -64,7 +64,7 @@ int	key_press_event(int key, void *param)
 	return (0);
 }
 
-int	key_release_event(int key, void *param)
+int		key_release_event(int key, void *param)
 {
 	t_env	*env;
 
@@ -92,7 +92,7 @@ int	key_release_event(int key, void *param)
 	return (0);
 }
 
-int	win_event(void *param)
+int		win_event(void *param)
 {
 	t_env	*env;
 

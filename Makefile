@@ -6,7 +6,7 @@
 #    By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 14:13:30 by crenaudi          #+#    #+#              #
-#    Updated: 2019/03/10 17:58:17 by crenaudi         ###   ########.fr        #
+#    Updated: 2019/03/29 15:38:32 by crenaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ $(LIBGFX):
 	make -sC $(LIBGFX_FOLDER)
 
 $(NAME): $(OBJ) $(LIBFT) $(LIBGFX)
-	@$(CC) -fsanitize=address -g3 $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(LIB2) $(LIBGFX) $(OBJ)
+	@$(CC) -g3 $(MINILIBX) $(FRAMEWORK) -o $(NAME) $(LIB_MATH) $(LIB) $(LIB2) $(LIBGFX) $(OBJ)
 	@echo "/// all fdf ///"
 
 clean:

@@ -6,15 +6,15 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 16:36:34 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/02/15 18:12:05 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/29 14:40:09 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
 
-t_p		*add_point(int x, int y, int z)
+t_p				*add_point(int x, int y, int z)
 {
-	t_p	*p;
+	t_p		*p;
 
 	p = (t_p *)malloc(sizeof(t_p));
 	p->x = (float)x;
@@ -24,10 +24,10 @@ t_p		*add_point(int x, int y, int z)
 	return (p);
 }
 
-static void	coordonees(char **line, t_env *env, int x, int y)
+static void		coordonees(char **line, t_env *env, int x, int y)
 {
-	t_p	*p;
-	int	z;
+	t_p		*p;
+	int		z;
 
 	z = ft_atoi(*line);
 	env->z_min = (float)(z < env->z_min ? z : env->z_min);
@@ -44,12 +44,12 @@ static void	coordonees(char **line, t_env *env, int x, int y)
 		(*line)++;
 }
 
-static t_point 	**make_tab(int y, t_env *env)
+static t_point	**make_tab(int y, t_env *env)
 {
-	t_point **tab;
-	t_point *point;
-	t_p		*p;
-	int 	x;
+	t_point		**tab;
+	t_point		*point;
+	t_p			*p;
+	int			x;
 
 	y = env->y_max;
 	p = env->p;
@@ -60,24 +60,19 @@ static t_point 	**make_tab(int y, t_env *env)
 		x = env->x_max;
 		if (!(point = (t_point *)malloc(sizeof(t_point) * env->x_max)))
 			return (NULL);
-
 		tab[y] = point;
 		while (x--)
 		{
 			point[x].x = p->x;
 			point[x].y = p->y;
 			point[x].z = p->z;
-			//ft_putnbr(p->x);
-			//ft_putchar(' ');
 			p = p->next;
 		}
-		//ft_putnbr(y);
-		//ft_putchar('\n');
 	}
 	return (tab);
 }
 
-static void complete_env(t_env *env, int x, int y)
+static void		complete_env(t_env *env, int x, int y)
 {
 	env->x_max = x;
 	env->y_max = y;
@@ -85,11 +80,11 @@ static void complete_env(t_env *env, int x, int y)
 	env->tab_m = make_tab(-1, env);
 }
 
-int		stock_env(int fd, t_env *env)
+int				stock_env(int fd, t_env *env)
 {
 	char	*line2;
 	t_p		*p;
-	t_vec2 index;
+	t_vec2	index;
 
 	index.y = 0;
 	p = NULL;
@@ -103,7 +98,7 @@ int		stock_env(int fd, t_env *env)
 			while (*env->line == ' ')
 				env->line++;
 			if (*env->line == '\0')
-				break;
+				break ;
 			coordonees(&env->line, env, index.x, index.y);
 			index.x++;
 		}

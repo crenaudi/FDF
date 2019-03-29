@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trace.c  		                                      :+:      :+:    :+:   */
+/*   trace.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/27 16:32:17 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/10 19:49:52 by crenaudi         ###   ########.fr       */
+/*   Created: 2019/03/29 14:43:37 by crenaudi          #+#    #+#             */
+/*   Updated: 2019/03/29 14:45:11 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
 
-static void px(t_img *img, int x, int y, int color)
+static void		px(t_img *img, int x, int y, int color)
 {
-	int index;
+	int		index;
 
 	index = x + y * WIN_W;
 	if (index < 0 || index >= WIN_H * WIN_W)
 		return ;
-	img->data [index] = color;
+	img->data[index] = color;
 }
 
-static void need_px(t_trace *b, t_env *env)
+static void		need_px(t_trace *b, t_env *env)
 {
 	int x;
 	int y;
@@ -34,7 +34,7 @@ static void need_px(t_trace *b, t_env *env)
 			fmod(((vec2_dist(b->p2 - b->p1)) / b->t) + env->bert, 1.0)));
 }
 
-static void	init_trace(t_trace *b, t_point p1, t_point p2, t_vec3 z)
+static void		init_trace(t_trace *b, t_point p1, t_point p2, t_vec3 z)
 {
 	ft_bzero(b, sizeof(t_trace));
 	b->p1 = (t_vec2){(int)p1.x, (int)p1.y};
@@ -50,10 +50,10 @@ static void	init_trace(t_trace *b, t_point p1, t_point p2, t_vec3 z)
 	b->t = vec2_dist(b->p2 - b->p1);
 }
 
-void	line(t_env *env, t_point p1, t_point p2, t_vec3 z)
+void			line(t_env *env, t_point p1, t_point p2, t_vec3 z)
 {
-	t_trace	b;
-	t_vec2 	err;
+	t_trace		b;
+	t_vec2		err;
 
 	init_trace(&b, p1, p2, z);
 	err.x = (b.dir.x > b.dir.y ? b.dir.x : -b.dir.y) / 2;

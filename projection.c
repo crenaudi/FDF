@@ -6,7 +6,7 @@
 /*   By: crenaudi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 16:19:28 by crenaudi          #+#    #+#             */
-/*   Updated: 2019/03/10 19:49:11 by crenaudi         ###   ########.fr       */
+/*   Updated: 2019/03/29 14:43:20 by crenaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static float	lerp_z(t_env *env, float z)
 
 static int		trace(t_env *env, t_point **coord)
 {
-	int			x;
-	int			y;
+	int		x;
+	int		y;
 	t_vec3	z;
 
 	y = -1;
@@ -48,10 +48,10 @@ static int		trace(t_env *env, t_point **coord)
 	return (SUCCESS);
 }
 
-int						converte(t_env *env)
+int				converte(t_env *env)
 {
-	int			x;
-	int			y;
+	int		x;
+	int		y;
 
 	y = -1;
 	while (++y < env->y_max)
